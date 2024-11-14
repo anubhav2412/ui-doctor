@@ -36,6 +36,7 @@ public class HTMLScannerService {
         int totalTags = 0;
         int totalClasses = 0;
 
+
         try (ZipFile zipFile = new ZipFile(tempFile)) {
             Enumeration<ZipArchiveEntry> entries = zipFile.getEntries();
             while (entries.hasMoreElements()) {
