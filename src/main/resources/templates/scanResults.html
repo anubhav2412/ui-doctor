@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Scan Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1 class="header__title">HTML Scan Results</h1>
+        <p class="header__subtitle">Analysis of HTML components and classes usage</p>
+    </header>
+
+    <div class="summary">
+        <div class="summary__card">
+            <h3 class="summary__card-title">Library Components</h3>
+            <div class="summary__card-content">
+                <span class="summary__percentage" id="libraryTagPercentage">0</span>
+                <span class="summary__percentage-symbol">%</span>
+            </div>
+        </div>
+        <div class="summary__card">
+            <h3 class="summary__card-title">Library Classes</h3>
+            <div class="summary__card-content">
+                <span class="summary__percentage" id="libraryClassPercentage">0</span>
+                <span class="summary__percentage-symbol">%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="results-grid">
+        <section class="results-section">
+            <h2 class="results-section__title">Library Components (Tags)</h2>
+            <div class="table-container">
+                <table class="results-table" id="libraryComponentsTable">
+                    <thead>
+                    <tr>
+                        <th>Tag</th>
+                        <th>Occurrences</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <h2 class="results-section__title">Native Components (Tags)</h2>
+            <div class="table-container">
+                <table class="results-table" id="nativeComponentsTable">
+                    <thead>
+                    <tr>
+                        <th>Tag</th>
+                        <th>Occurrences</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <h2 class="results-section__title">Library Classes</h2>
+            <div class="table-container">
+                <table class="results-table" id="libraryClassesTable">
+                    <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Occurrences</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <h2 class="results-section__title">Native Classes</h2>
+            <div class="table-container">
+                <table class="results-table" id="nativeClassesTable">
+                    <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Occurrences</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="scripts.js"></script>
+</body>
+</html>
