@@ -1,12 +1,33 @@
-Certainly! Here is the content formatted for Confluence. You can copy and paste it into the code section of your page:
 
-h1. HTML Component Scanner
 
-h2. Overview
 
-The HTML Component Scanner is a desktop application designed to provide an in-depth understanding of how your website is constructed. Think of it as an X-ray machine for your website’s building blocks! It operates entirely offline, ensuring that you don’t need an internet connection to use it.
 
-h2. Why Use the HTML Component Scanner?
+h1. HTML Component Analyzer
+
+{panel:title=Quick Links|borderStyle=solid|borderColor=#ccc}
+	•	[Overview|#Overview]
+	•	[Technical Documentation|#Technical-Documentation]
+	•	[Usage Guidelines|#Usage-Guidelines]
+{panel}
+
+{status:title=Project Status|color=green}
+Production Ready
+{status}
+
+h2. About This Space
+
+This space contains documentation for the HTML Component Analyzer tool.
+
+{info}
+🔍 New users: Start with the [Overview|#Overview] section
+👨‍💻 Developers: Check the [Technical Documentation|#Technical-Documentation]
+{info}
+
+h1. Overview {anchor:Overview}
+
+The HTML Component Analyzer is a desktop application designed to provide an in-depth understanding of how your website is constructed. Think of it as an X-ray machine for your website’s building blocks! It operates entirely offline, ensuring that you don’t need an internet connection to use it.
+
+h2. Why Use the HTML Component Analyzer?
 
 Imagine wanting to analyze a house to understand:
 	•	Custom vs. Standard Materials: How many custom-built pieces are used compared to standard building materials?
@@ -37,7 +58,7 @@ h3. 3. Clear and Detailed Results
 
 h2. How It Ensures Safety
 
-Similar to a metal detector at an airport, the HTML Component Scanner:
+Similar to a metal detector at an airport, the HTML Component Analyzer:
 	•	Accepts Only Specific Files: Only processes ZIP files containing HTML files.
 	•	Pre-Processing Checks: Validates and checks files before analysis.
 	•	Data Privacy: Your data never leaves your computer since it works offline.
@@ -108,9 +129,11 @@ The tool provides clear error messages to guide you:
 	•	Processing Issues: Notifies if there are problems that need attention.
 	•	Next Steps: Offers guidance on how to resolve any issues encountered.
 
-{color:#707070}Remember: This tool is like having an X-ray machine for your website—it allows you to see what’s inside without making any changes!{color}
+{info:title=Remember}
+This tool is like having an X-ray machine for your website—it allows you to see what’s inside without making any changes!
+{info}
 
-h1. Technical Documentation
+h1. Technical Documentation {anchor:Technical-Documentation}
 
 h2. 1. Technology Stack & Dependencies
 
@@ -137,45 +160,45 @@ h2. 2. Security Analysis
 
 h3. 2.1 File Upload Security
 
-{code:java|title=File Extension Validation}
+{noformat}
 if (file.isEmpty() || !file.getOriginalFilename().endsWith(”.zip”)) {
 model.addAttribute(“error”, “Please upload a valid zip file containing HTML files.”);
 return “uploadForm”;
 }
-{code}
+{noformat}
 	•	Validation: Checks if the uploaded file is not empty and has a .zip extension.
 	•	Prevention: Blocks the upload of potentially malicious file types.
 	•	User Feedback: Provides clear error messages for incorrect file types.
 
 h3. 2.2 Resource Management
 
-{code:java|title=Proper Resource Handling}
+{noformat}
 File tempFile = File.createTempFile(“uploaded”, “.zip”);
 try (ZipFile zipFile = new ZipFile(tempFile)) {
 // Processing logic
 } finally {
 tempFile.delete();
 }
-{code}
+{noformat}
 	•	Resource Handling: Utilizes try-with-resources for automatic closure.
 	•	Cleanup: Deletes temporary files after processing.
 	•	Prevention: Avoids file system resource leaks.
 
 h3. 2.3 Input Processing
 
-{code:java|title=Safe HTML Parsing}
+{noformat}
 Document doc = Jsoup.parse(inputStream, “UTF-8”, “”);
-{code}
+{noformat}
 	•	Safety: JSoup provides built-in protection against XSS attacks.
 	•	Encoding: Handles character encoding properly.
 	•	Parsing: Ensures safe processing of HTML content.
 
 h3. 2.4 Memory Management
 
-{code:java|title=Efficient Data Structures}
+{noformat}
 private Map<String, Integer> libraryComponents = new HashMap<>();
 private Map<String, Integer> nativeComponents = new HashMap<>();
-{code}
+{noformat}
 	•	Efficiency: Uses appropriate data structures for counting and categorization.
 	•	Memory Management: Relies on Java’s automatic garbage collection.
 	•	Performance: Optimizes memory usage without manual intervention.
@@ -194,13 +217,13 @@ h3. 3.2 Performance
 
 h3. 3.3 Extensibility
 
-{code:java|title=Configurable Component Prefix}
+{noformat}
 @Service
 public class HTMLScannerService {
 private static final String LIBRARY_PREFIX = “app-”;
 // Easy to modify prefix for different component libraries
 }
-{code}
+{noformat}
 	•	Configurable Prefix: Easily adjust the component library prefix as needed.
 	•	Modular Architecture: Service-based design allows for straightforward extension.
 	•	Separation of Concerns: Distinct layers for different functionalities.
@@ -212,7 +235,7 @@ h3. 3.4 Comprehensive Analysis
 
 h3. 3.5 Multiple Output Formats
 
-{code:java|title=REST API and HTML Output}
+{noformat}
 // REST API endpoint for JSON output
 @GetMapping(”/api/scanResults”)
 @ResponseBody
@@ -225,7 +248,7 @@ public Map<String, Object> getScanResults() {
 public String uploadFile(@RequestParam(“file”) MultipartFile file, Model model) {
 // Implementation
 }
-{code}
+{noformat}
 	•	Flexible Output: Supports both JSON for API integration and HTML for user interfaces.
 	•	Integration: Can be incorporated into other tools or systems.
 	•	User-Friendly: Provides outputs that are accessible to both technical and non-technical users.
@@ -246,6 +269,8 @@ h3. 4.3 Resource Management
 	•	File Handling: Proper opening and closing of file streams.
 	•	Memory Efficiency: Processes files and data without excessive memory consumption.
 	•	Cleanup: Ensures that temporary resources are deleted after use.
+
+h1. Usage Guidelines {anchor:Usage-Guidelines}
 
 h2. 5. Usage Guidelines
 
@@ -285,4 +310,4 @@ The tool is designed to be intuitive, but if you encounter issues:
 	•	Contact Support: Reach out to the development team for assistance with unexpected issues.
 	•	Documentation: Refer to this guide for detailed information on features and usage.
 
-Enjoy exploring your website’s inner workings with the HTML Component Scanner!
+Enjoy exploring your website’s inner workings with the HTML Component Analyzer!
