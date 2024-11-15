@@ -1,3 +1,113 @@
+
+HTML Component Scanner - A Simple Guide
+What Does This Tool Do?
+This is a desktop application that helps you understand how your website is built - kind of like getting an X-ray of your website's building blocks! It works completely offline, so you don't need internet access to use it.
+Why Is It Useful?
+Imagine you're looking at a house and want to know:
+
+How many custom-built pieces are used vs. standard building materials
+What special features have been added
+How much of the house uses premium materials vs. standard ones
+
+This tool does exactly that, but for websites!
+Key Features
+1. Easy to Use
+
+Just upload a ZIP file containing your website files
+Get instant results
+No technical knowledge needed
+
+2. Safe and Secure
+
+Works on your computer without internet
+Doesn't modify your files - just reads them
+Automatically cleans up after itself
+
+3. Clear Results
+You get to see:
+
+How much of your website uses custom components
+How much uses standard web components
+Easy-to-understand percentages and breakdowns
+
+How Is It Safe?
+Think of it like a metal detector at an airport:
+
+It only accepts specific types of files (ZIP files)
+It checks what's inside before processing
+It doesn't keep any of your data after analysis
+It works offline, so your data never leaves your computer
+
+What You Get
+1. Visual Reports
+
+Charts showing the makeup of your website
+Clear breakdowns of custom vs. standard parts
+Easy-to-read percentages
+
+2. Detailed Information
+
+Lists of all components used
+How often each component is used
+What special features your website uses
+
+When Should You Use It?
+This tool is perfect when:
+
+You're taking over a website and want to understand how it's built
+You're checking if a website follows your company's standards
+You want to know how much custom code vs. standard code is used
+You need to document what components are used in your website
+
+Benefits
+
+Time Saving: Get instant insights instead of manually checking code
+Quality Check: Easily see if your website follows standards
+Documentation: Get clear reports about your website's structure
+Security: All analysis happens on your computer only
+Simplicity: No need for technical knowledge to understand results
+
+What You Need
+
+A computer (Windows, Mac, or Linux)
+Your website files in a ZIP format
+That's it! No internet needed
+
+Common Questions
+"Is it safe to use with my files?"
+Yes! The tool:
+
+Never modifies your original files
+Works like a PDF reader - it just looks at the files
+Doesn't send any data anywhere
+Cleans up after itself automatically
+
+"Do I need technical knowledge?"
+No! While the tool analyzes technical aspects of websites, it presents results in an easy-to-understand format.
+"What kind of files can I analyze?"
+
+ZIP files containing website files
+Files must be properly formatted HTML
+That's all you need!
+
+"Will it change my files?"
+No! The tool only reads your files - like looking at a document through a magnifying glass. It doesn't make any changes to your original files.
+Tips for Best Results
+
+Make sure your files are in a ZIP format
+Include all HTML files you want to analyze
+Wait for the analysis to complete before closing
+Save the reports if you need them later
+
+Need Help?
+The tool includes clear error messages that tell you:
+
+If your file isn't the right type
+If something needs to be fixed
+What to do next
+
+Remember: This is like having an X-ray machine for your website - it helps you see what's inside without changing anything!
+
 HTML Component Analyzer - Technical Documentation
 1. Technology Stack & Dependencies
 1.1 Core Technologies
