@@ -1,165 +1,246 @@
-HTML Component Scanner
+<h1>HTML Component Analyzer</h1>
 
-Overview
+<!-- Quick Links Panel -->
+<div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+    <strong>Quick Links</strong>
+    <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#technical-documentation">Technical Documentation</a></li>
+        <li><a href="#usage-guidelines">Usage Guidelines</a></li>
+    </ul>
+</div>
 
-The HTML Component Scanner is a desktop application designed to provide an in-depth understanding of how your website is constructed. Think of it as an X-ray machine for your website’s building blocks! It operates entirely offline, ensuring that you don’t need an internet connection to use it.
+<!-- Project Status -->
+<div style="background-color:#e6ffe6; padding:10px; border:1px solid #00cc00; margin-bottom:10px;">
+    <strong>Project Status:</strong> Production Ready
+</div>
 
-Why Use the HTML Component Scanner?
+<h2>About This Space</h2>
+<p>This space contains documentation for the HTML Component Analyzer tool.</p>
 
-Imagine wanting to analyze a house to understand:
-	•	Custom vs. Standard Materials: How many custom-built pieces are used compared to standard building materials?
-	•	Special Features: What unique features have been added?
-	•	Material Quality: How much of the house uses premium materials versus standard ones?
+<!-- Info Box -->
+<div style="background-color:#f0f8ff; padding:10px; border-left:5px solid #0366d6; margin-bottom:20px;">
+    <p>🔍 <strong>New users</strong>: Start with the <a href="#overview">Overview</a> section</p>
+    <p>👨‍💻 <strong>Developers</strong>: Check the <a href="#technical-documentation">Technical Documentation</a></p>
+</div>
 
-This tool offers a similar analysis for websites, helping you:
-	•	Determine the proportion of custom components versus standard web components.
-	•	Identify special features and custom code used in your website.
-	•	Understand the overall structure and component usage within your site.
+<hr>
 
-Key Features
+<h1 id="overview">Overview</h1>
+<p>The <em>HTML Component Analyzer</em> is a desktop application designed to provide an in-depth understanding of how your website is constructed. Think of it as an X-ray machine for your website's building blocks! It operates entirely offline, ensuring that you don't need an internet connection to use it.</p>
 
-1. User-Friendly Interface
+<hr>
 
-	•	Simple Upload: Just upload a ZIP file containing your website’s files.
-	•	Instant Results: Receive immediate analysis without waiting.
-	•	No Technical Expertise Required: Designed for users without a technical background.
+<h2>Why Use the HTML Component Analyzer?</h2>
+<p>Imagine wanting to analyze a house to understand:</p>
+<ul>
+    <li><em>Custom vs. Standard Materials</em>: How many custom-built pieces are used compared to standard building materials?</li>
+    <li><em>Special Features</em>: What unique features have been added?</li>
+    <li><em>Material Quality</em>: How much of the house uses premium materials versus standard ones?</li>
+</ul>
+<p>This tool offers a similar analysis for websites, helping you:</p>
+<ul>
+    <li>Determine the proportion of custom components versus standard web components.</li>
+    <li>Identify special features and custom code used in your website.</li>
+    <li>Understand the overall structure and component usage within your site.</li>
+</ul>
 
-2. Safe and Secure
+<hr>
 
-	•	Offline Operation: Runs entirely on your computer without needing an internet connection.
-	•	Read-Only Analysis: Doesn’t modify your files—only reads them for analysis.
-	•	Automatic Cleanup: Cleans up temporary files after completing the analysis.
+<h2>Key Features</h2>
 
-3. Clear and Detailed Results
+<h3>1. User-Friendly Interface</h3>
+<ul>
+    <li><em>Simple Upload</em>: Just upload a ZIP file containing your website's files.</li>
+    <li><em>Instant Results</em>: Receive immediate analysis without waiting.</li>
+    <li><em>No Technical Expertise Required</em>: Designed for users without a technical background.</li>
+</ul>
 
-	•	Visual Reports: Provides charts and graphs showing the composition of your website.
-	•	Component Breakdown: Detailed statistics on custom versus standard components.
-	•	Easy Interpretation: Presents data in understandable percentages and summaries.
+<h3>2. Safe and Secure</h3>
+<ul>
+    <li><em>Offline Operation</em>: Runs entirely on your computer without needing an internet connection.</li>
+    <li><em>Read-Only Analysis</em>: Doesn't modify your files—only reads them for analysis.</li>
+    <li><em>Automatic Cleanup</em>: Cleans up temporary files after completing the analysis.</li>
+</ul>
 
-How It Ensures Safety
+<h3>3. Clear and Detailed Results</h3>
+<ul>
+    <li><em>Visual Reports</em>: Provides charts and graphs showing the composition of your website.</li>
+    <li><em>Component Breakdown</em>: Detailed statistics on custom versus standard components.</li>
+    <li><em>Easy Interpretation</em>: Presents data in understandable percentages and summaries.</li>
+</ul>
 
-Similar to a metal detector at an airport, the HTML Component Scanner:
-	•	Accepts Only Specific Files: Only processes ZIP files containing HTML files.
-	•	Pre-Processing Checks: Validates and checks files before analysis.
-	•	Data Privacy: Your data never leaves your computer since it works offline.
-	•	No Residual Data: Does not retain any of your data post-analysis.
+<hr>
 
-What You Receive
+<h2>How It Ensures Safety</h2>
+<p>Similar to a metal detector at an airport, the HTML Component Analyzer:</p>
+<ul>
+    <li><em>Accepts Only Specific Files</em>: Only processes ZIP files containing HTML files.</li>
+    <li><em>Pre-Processing Checks</em>: Validates and checks files before analysis.</li>
+    <li><em>Data Privacy</em>: Your data never leaves your computer since it works offline.</li>
+    <li><em>No Residual Data</em>: Does not retain any of your data post-analysis.</li>
+</ul>
 
-1. Visual Reports
+<hr>
 
-	•	Charts and Graphs: Visual representations of your website’s structure.
-	•	Component Composition: Breakdown of custom and standard parts.
-	•	Percentage Metrics: Easy-to-read percentages for quick insights.
+<h2>What You Receive</h2>
 
-2. Detailed Information
+<h3>1. Visual Reports</h3>
+<ul>
+    <li><em>Charts and Graphs</em>: Visual representations of your website's structure.</li>
+    <li><em>Component Composition</em>: Breakdown of custom and standard parts.</li>
+    <li><em>Percentage Metrics</em>: Easy-to-read percentages for quick insights.</li>
+</ul>
 
-	•	Component Lists: Comprehensive lists of all components used.
-	•	Usage Frequency: Data on how often each component appears.
-	•	Special Features: Identification of unique features and custom code.
+<h3>2. Detailed Information</h3>
+<ul>
+    <li><em>Component Lists</em>: Comprehensive lists of all components used.</li>
+    <li><em>Usage Frequency</em>: Data on how often each component appears.</li>
+    <li><em>Special Features</em>: Identification of unique features and custom code.</li>
+</ul>
 
-Ideal Use Cases
+<hr>
 
-	•	Website Onboarding: When taking over a website and needing to understand its construction.
-	•	Compliance Checking: Verifying if a website adheres to company or industry standards.
-	•	Code Analysis: Determining the balance between custom code and standard code.
-	•	Documentation: Creating detailed reports on the components used within a website.
+<h2>Ideal Use Cases</h2>
+<ul>
+    <li><em>Website Onboarding</em>: When taking over a website and needing to understand its construction.</li>
+    <li><em>Compliance Checking</em>: Verifying if a website adheres to company or industry standards.</li>
+    <li><em>Code Analysis</em>: Determining the balance between custom code and standard code.</li>
+    <li><em>Documentation</em>: Creating detailed reports on the components used within a website.</li>
+</ul>
 
-Benefits
+<hr>
 
-	•	Time-Saving: Eliminates the need for manual code inspection.
-	•	Quality Assurance: Quickly assess if your website follows best practices and standards.
-	•	Comprehensive Documentation: Provides clear and detailed reports.
-	•	Enhanced Security: All analysis is conducted locally on your machine.
-	•	Ease of Use: No technical knowledge required to interpret the results.
+<h2>Benefits</h2>
+<ul>
+    <li><em>Time-Saving</em>: Eliminates the need for manual code inspection.</li>
+    <li><em>Quality Assurance</em>: Quickly assess if your website follows best practices and standards.</li>
+    <li><em>Comprehensive Documentation</em>: Provides clear and detailed reports.</li>
+    <li><em>Enhanced Security</em>: All analysis is conducted locally on your machine.</li>
+    <li><em>Ease of Use</em>: No technical knowledge required to interpret the results.</li>
+</ul>
 
-Requirements
+<hr>
 
-	•	Operating System: Compatible with Windows, macOS, and Linux.
-	•	Input Files: Your website files packaged in a ZIP format.
-	•	No Internet Needed: Operates entirely offline.
+<h2>Requirements</h2>
+<ul>
+    <li><em>Operating System</em>: Compatible with Windows, macOS, and Linux.</li>
+    <li><em>Input Files</em>: Your website files packaged in a ZIP format.</li>
+    <li><em>No Internet Needed</em>: Operates entirely offline.</li>
+</ul>
 
-Frequently Asked Questions
+<hr>
 
-Is it safe to use with my files?
+<h2>Frequently Asked Questions</h2>
 
-Absolutely! The tool:
-	•	Read-Only Access: Never modifies your original files.
-	•	Local Processing: Works like a PDF reader—it only views your files.
-	•	Data Privacy: Does not send any data over the internet.
-	•	Automatic Cleanup: Deletes temporary files after analysis.
+<h3>Is it safe to use with my files?</h3>
+<p>Absolutely! The tool:</p>
+<ul>
+    <li><em>Read-Only Access</em>: Never modifies your original files.</li>
+    <li><em>Local Processing</em>: Works like a PDF reader—it only views your files.</li>
+    <li><em>Data Privacy</em>: Does not send any data over the internet.</li>
+    <li><em>Automatic Cleanup</em>: Deletes temporary files after analysis.</li>
+</ul>
 
-Do I need technical knowledge?
+<h3>Do I need technical knowledge?</h3>
+<p>No technical expertise is required. While the tool analyzes technical aspects, it presents the results in a user-friendly format that's easy to understand.</p>
 
-No technical expertise is required. While the tool analyzes technical aspects, it presents the results in a user-friendly format that’s easy to understand.
+<h3>What kind of files can I analyze?</h3>
+<ul>
+    <li><em>Supported Files</em>: ZIP files containing properly formatted HTML files.</li>
+    <li><em>Simple Requirements</em>: As long as your website files are in a ZIP archive, you're good to go!</li>
+</ul>
 
-What kind of files can I analyze?
+<h3>Will it change my files?</h3>
+<p>Not at all. The tool only reads your files, much like looking at a document through a magnifying glass. Your original files remain untouched.</p>
 
-	•	Supported Files: ZIP files containing properly formatted HTML files.
-	•	Simple Requirements: As long as your website files are in a ZIP archive, you’re good to go!
+<hr>
 
-Will it change my files?
+<h2>Tips for Best Results</h2>
+<ul>
+    <li><em>Correct File Format</em>: Ensure your files are zipped in a ZIP format.</li>
+    <li><em>Include All Relevant Files</em>: Add all the HTML files you wish to analyze.</li>
+    <li><em>Patience During Analysis</em>: Wait for the analysis to complete before closing the application.</li>
+    <li><em>Save Your Reports</em>: If you need to reference the results later, be sure to save them.</li>
+</ul>
 
-Not at all. The tool only reads your files, much like looking at a document through a magnifying glass. Your original files remain untouched.
+<hr>
 
-Tips for Best Results
+<h2>Need Help?</h2>
+<p>The tool provides clear error messages to guide you:</p>
+<ul>
+    <li><em>File Type Errors</em>: Alerts if the uploaded file isn't a ZIP archive.</li>
+    <li><em>Processing Issues</em>: Notifies if there are problems that need attention.</li>
+    <li><em>Next Steps</em>: Offers guidance on how to resolve any issues encountered.</li>
+</ul>
 
-	•	Correct File Format: Ensure your files are zipped in a ZIP format.
-	•	Include All Relevant Files: Add all the HTML files you wish to analyze.
-	•	Patience During Analysis: Wait for the analysis to complete before closing the application.
-	•	Save Your Reports: If you need to reference the results later, be sure to save them.
+<div style="background-color:#f9f9f9; padding:10px; border-left:5px solid #ccc; margin-top:20px;">
+    <p><em>Remember: This tool is like having an X-ray machine for your website—it allows you to see what's inside without making any changes!</em></p>
+</div>
 
-Need Help?
+<hr>
 
-The tool provides clear error messages to guide you:
-	•	File Type Errors: Alerts if the uploaded file isn’t a ZIP archive.
-	•	Processing Issues: Notifies if there are problems that need attention.
-	•	Next Steps: Offers guidance on how to resolve any issues encountered.
+<h1 id="technical-documentation">Technical Documentation</h1>
 
-Remember: This tool is like having an X-ray machine for your website—it allows you to see what’s inside without making any changes!
+<h2>1. Technology Stack &amp; Dependencies</h2>
 
-Technical Documentation
+<h3>1.1 Core Technologies</h3>
+<ul>
+    <li><em>Spring Framework</em>
+        <ul>
+            <li><em>Spring Boot</em>: Simplifies the bootstrapping and development of new Spring applications.</li>
+            <li><em>Spring MVC</em>: Utilizes <code>@Controller</code> and <code>@Service</code> annotations for handling web requests.</li>
+            <li><em>Spring Dependency Injection</em>: Employs <code>@Autowired</code> for managing dependencies.</li>
+        </ul>
+    </li>
+</ul>
 
-1. Technology Stack & Dependencies
+<h3>1.2 External Dependencies</h3>
+<ul>
+    <li><em>Apache Commons Compress</em>
+        <ul>
+            <li><em>Purpose</em>: Secure handling and processing of ZIP archives.</li>
+            <li><em>Classes Used</em>: <code>ZipArchiveEntry</code>, <code>ZipFile</code>.</li>
+        </ul>
+    </li>
+    <li><em>JSoup</em>
+        <ul>
+            <li><em>Purpose</em>: Safe parsing and analysis of HTML content.</li>
+            <li><em>Classes Used</em>: <code>Document</code>, <code>Element</code>, <code>Elements</code>.</li>
+        </ul>
+    </li>
+</ul>
 
-1.1 Core Technologies
+<h3>1.3 File Processing</h3>
+<ul>
+    <li><em>Multipart File Handling</em>: Manages file uploads using <code>MultipartFile</code>.</li>
+    <li><em>Encoding Support</em>: Ensures proper handling of UTF-8 encoded files.</li>
+    <li><em>Temporary File Management</em>: Creates and deletes temporary files during processing.</li>
+</ul>
 
-	•	Spring Framework
-	•	Spring Boot: Simplifies the bootstrapping and development of new Spring applications.
-	•	Spring MVC: Utilizes @Controller and @Service annotations for handling web requests.
-	•	Spring Dependency Injection: Employs @Autowired for managing dependencies.
+<hr>
 
-1.2 External Dependencies
+<h2>2. Security Analysis</h2>
 
-	•	Apache Commons Compress
-	•	Purpose: Secure handling and processing of ZIP archives.
-	•	Classes Used: ZipArchiveEntry, ZipFile.
-	•	JSoup
-	•	Purpose: Safe parsing and analysis of HTML content.
-	•	Classes Used: Document, Element, Elements.
+<h3>2.1 File Upload Security</h3>
 
-1.3 File Processing
-
-	•	Multipart File Handling: Manages file uploads using MultipartFile.
-	•	Encoding Support: Ensures proper handling of UTF-8 encoded files.
-	•	Temporary File Management: Creates and deletes temporary files during processing.
-
-2. Security Analysis
-
-2.1 File Upload Security
-
+<pre><code>
 // Security Feature 1: File Extension Validation
 if (file.isEmpty() || !file.getOriginalFilename().endsWith(".zip")) {
     model.addAttribute("error", "Please upload a valid zip file containing HTML files.");
     return "uploadForm";
 }
+</code></pre>
 
-	•	Validation: Checks if the uploaded file is not empty and has a .zip extension.
-	•	Prevention: Blocks the upload of potentially malicious file types.
-	•	User Feedback: Provides clear error messages for incorrect file types.
+<ul>
+    <li><em>Validation</em>: Checks if the uploaded file is not empty and has a <code>.zip</code> extension.</li>
+    <li><em>Prevention</em>: Blocks the upload of potentially malicious file types.</li>
+    <li><em>User Feedback</em>: Provides clear error messages for incorrect file types.</li>
+</ul>
 
-2.2 Resource Management
+<h3>2.2 Resource Management</h3>
 
+<pre><code>
 // Security Feature 2: Proper Resource Handling
 File tempFile = File.createTempFile("uploaded", ".zip");
 try (ZipFile zipFile = new ZipFile(tempFile)) {
@@ -167,138 +248,162 @@ try (ZipFile zipFile = new ZipFile(tempFile)) {
 } finally {
     tempFile.delete();
 }
+</code></pre>
 
-	•	Resource Handling: Utilizes try-with-resources for automatic closure.
-	•	Cleanup: Deletes temporary files after processing.
-	•	Prevention: Avoids file system resource leaks.
+<ul>
+    <li><em>Resource Handling</em>: Utilizes try-with-resources for automatic closure.</li>
+    <li><em>Cleanup</em>: Deletes temporary files after processing.</li>
+    <li><em>Prevention</em>: Avoids file system resource leaks.</li>
+</ul>
 
-2.3 Input Processing
+<h3>2.3 Input Processing</h3>
 
+<pre><code>
 // Security Feature 3: Safe HTML Parsing
 Document doc = Jsoup.parse(inputStream, "UTF-8", "");
+</code></pre>
 
-	•	Safety: JSoup provides built-in protection against XSS attacks.
-	•	Encoding: Handles character encoding properly.
-	•	Parsing: Ensures safe processing of HTML content.
+<ul>
+    <li><em>Safety</em>: JSoup provides built-in protection against XSS attacks.</li>
+    <li><em>Encoding</em>: Handles character encoding properly.</li>
+    <li><em>Parsing</em>: Ensures safe processing of HTML content.</li>
+</ul>
 
-2.4 Memory Management
+<h3>2.4 Memory Management</h3>
 
+<pre><code>
 // Security Feature 4: Efficient Data Structures
-private Map<String, Integer> libraryComponents = new HashMap<>();
-private Map<String, Integer> nativeComponents = new HashMap<>();
+private Map&lt;String, Integer&gt; libraryComponents = new HashMap&lt;&gt;();
+private Map&lt;String, Integer&gt; nativeComponents = new HashMap&lt;&gt;();
+</code></pre>
 
-	•	Efficiency: Uses appropriate data structures for counting and categorization.
-	•	Memory Management: Relies on Java’s automatic garbage collection.
-	•	Performance: Optimizes memory usage without manual intervention.
+<ul>
+    <li><em>Efficiency</em>: Uses appropriate data structures for counting and categorization.</li>
+    <li><em>Memory Management</em>: Relies on Java's automatic garbage collection.</li>
+    <li><em>Performance</em>: Optimizes memory usage without manual intervention.</li>
+</ul>
 
-3. Advantages
+<hr>
 
-3.1 Offline Capability
+<h2>3. Advantages</h2>
 
-	•	No Internet Required: All processing is done locally.
-	•	Data Privacy: Ensures that your files and data remain on your machine.
-	•	Self-Contained: Does not depend on external services.
+<h3>3.1 Offline Capability</h3>
+<ul>
+    <li><em>No Internet Required</em>: All processing is done locally.</li>
+    <li><em>Data Privacy</em>: Ensures that your files and data remain on your machine.</li>
+    <li><em>Self-Contained</em>: Does not depend on external services.</li>
+</ul>
 
-3.2 Performance
+<h3>3.2 Performance</h3>
+<ul>
+    <li><em>Efficient Processing</em>: Uses streaming for file handling.</li>
+    <li><em>Single-Pass Analysis</em>: Scans for tags and classes in one go.</li>
+    <li><em>Optimized Structures</em>: Employs data structures that enhance speed and efficiency.</li>
+</ul>
 
-	•	Efficient Processing: Uses streaming for file handling.
-	•	Single-Pass Analysis: Scans for tags and classes in one go.
-	•	Optimized Structures: Employs data structures that enhance speed and efficiency.
+<h3>3.3 Extensibility</h3>
 
-3.3 Extensibility
-
+<pre><code>
 @Service
 public class HTMLScannerService {
     private static final String LIBRARY_PREFIX = "app-";
     // Easy to modify prefix for different component libraries
 }
+</code></pre>
 
-	•	Configurable Prefix: Easily adjust the component library prefix as needed.
-	•	Modular Architecture: Service-based design allows for straightforward extension.
-	•	Separation of Concerns: Distinct layers for different functionalities.
+<ul>
+    <li><em>Configurable Prefix</em>: Easily adjust the component library prefix as needed.</li>
+    <li><em>Modular Architecture</em>: Service-based design allows for straightforward extension.</li>
+    <li><em>Separation of Concerns</em>: Distinct layers for different functionalities.</li>
+</ul>
 
-3.4 Comprehensive Analysis
+<h3>3.4 Comprehensive Analysis</h3>
+<ul>
+    <li><em>Detailed Statistics</em>: Provides extensive data on component usage.</li>
+    <li><em>Class Analysis</em>: Examines and reports on class usage patterns.</li>
+    <li><em>Insightful Metrics</em>: Calculates percentages and ratios for better understanding.</li>
+</ul>
 
-	•	Detailed Statistics: Provides extensive data on component usage.
-	•	Class Analysis: Examines and reports on class usage patterns.
-	•	Insightful Metrics: Calculates percentages and ratios for better understanding.
+<h3>3.5 Multiple Output Formats</h3>
 
-3.5 Multiple Output Formats
-
+<pre><code>
 // REST API endpoint for JSON output
 @GetMapping("/api/scanResults")
 @ResponseBody
-public Map<String, Object> getScanResults()
+public Map&lt;String, Object&gt; getScanResults() {
+    // Implementation
+}
 
 // HTML view for human-readable output
 @PostMapping("/upload")
-public String uploadFile(@RequestParam("file") MultipartFile file, Model model)
+public String uploadFile(@RequestParam("file") MultipartFile file, Model model) {
+    // Implementation
+}
+</code></pre>
 
-	•	Flexible Output: Supports both JSON for API integration and HTML for user interfaces.
-	•	Integration: Can be incorporated into other tools or systems.
-	•	User-Friendly: Provides outputs that are accessible to both technical and non-technical users.
+<ul>
+    <li><em>Flexible Output</em>: Supports both JSON for API integration and HTML for user interfaces.</li>
+    <li><em>Integration</em>: Can be incorporated into other tools or systems.</li>
+    <li><em>User-Friendly</em>: Provides outputs that are accessible to both technical and non-technical users.</li>
+</ul>
 
-4. Best Practices Implementation
+<hr>
 
-4.1 Code Organization
+<h1 id="usage-guidelines">Usage Guidelines</h1>
 
-	•	Modular Design: Clear separation between controllers and services.
-	•	Package Structure: Organized packages for easier navigation.
-	•	Naming Conventions: Consistent and descriptive naming for classes and methods.
+<h2>5. Usage Guidelines</h2>
 
-4.2 Error Handling
+<h3>5.1 Supported File Types</h3>
+<ul>
+    <li><em>ZIP Archives</em>: Only accepts ZIP files containing HTML files.</li>
+    <li><em>HTML Content</em>: Files must be properly formatted and UTF-8 encoded.</li>
+    <li><em>File Size</em>: No documented size restrictions (considerations for large files may be added in future versions).</li>
+</ul>
 
-	•	Input Validation: Checks user inputs and files before processing.
-	•	Exception Handling: Catches and manages exceptions gracefully.
-	•	User Feedback: Provides meaningful error messages to guide the user.
+<h3>5.2 Component Recognition</h3>
+<ul>
+    <li><em>Library Components</em>: Must use the <code>"app-"</code> prefix to be recognized as library components.</li>
+    <li><em>Native Components</em>: All other components are treated as native HTML elements.</li>
+    <li><em>Case Sensitivity</em>: Analysis is case-sensitive; ensure consistent naming conventions.</li>
+</ul>
 
-4.3 Resource Management
+<h3>5.3 Results Interpretation</h3>
+<ul>
+    <li><em>Usage Statistics</em>: Understand how frequently components are used.</li>
+    <li><em>Class Patterns</em>: Identify patterns in class usage across your website.</li>
+    <li><em>Usage Ratios</em>: Analyze the proportion of library components versus native components.</li>
+</ul>
 
-	•	File Handling: Proper opening and closing of file streams.
-	•	Memory Efficiency: Processes files and data without excessive memory consumption.
-	•	Cleanup: Ensures that temporary resources are deleted after use.
+<hr>
 
-5. Usage Guidelines
+<h2>6. Future Enhancements</h2>
 
-5.1 Supported File Types
+<h3>6.1 Potential Improvements</h3>
+<ul>
+    <li><em>Multiple Prefix Support</em>: Add the ability to recognize multiple component library prefixes.</li>
+    <li><em>Batch Processing</em>: Implement functionality to process multiple ZIP files simultaneously.</li>
+    <li><em>Component Relationships</em>: Analyze and report on relationships between components.</li>
+    <li><em>CSS Framework Detection</em>: Identify and report on CSS frameworks used.</li>
+    <li><em>Additional Archive Formats</em>: Support for other archive types like RAR and 7Z.</li>
+</ul>
 
-	•	ZIP Archives: Only accepts ZIP files containing HTML files.
-	•	HTML Content: Files must be properly formatted and UTF-8 encoded.
-	•	File Size: No documented size restrictions (considerations for large files may be added in future versions).
+<h3>6.2 Monitoring and Logging</h3>
+<ul>
+    <li><em>Performance Metrics</em>: Introduce metrics to monitor performance and resource usage.</li>
+    <li><em>Detailed Logging</em>: Implement comprehensive logging for debugging and auditing.</li>
+    <li><em>Analysis History</em>: Maintain a history of analyses for future reference.</li>
+</ul>
 
-5.2 Component Recognition
+<hr>
 
-	•	Library Components: Must use the “app-” prefix to be recognized as library components.
-	•	Native Components: All other components are treated as native HTML elements.
-	•	Case Sensitivity: Analysis is case-sensitive; ensure consistent naming conventions.
+<h2>Need Assistance?</h2>
+<p>The tool is designed to be intuitive, but if you encounter issues:</p>
+<ul>
+    <li><em>Error Messages</em>: Pay attention to any error messages—they provide guidance on resolving common problems.</li>
+    <li><em>Contact Support</em>: Reach out to the development team for assistance with unexpected issues.</li>
+    <li><em>Documentation</em>: Refer to this guide for detailed information on features and usage.</li>
+</ul>
 
-5.3 Results Interpretation
+<hr>
 
-	•	Usage Statistics: Understand how frequently components are used.
-	•	Class Patterns: Identify patterns in class usage across your website.
-	•	Usage Ratios: Analyze the proportion of library components versus native components.
-
-6. Future Enhancements
-
-6.1 Potential Improvements
-
-	•	Multiple Prefix Support: Add the ability to recognize multiple component library prefixes.
-	•	Batch Processing: Implement functionality to process multiple ZIP files simultaneously.
-	•	Component Relationships: Analyze and report on relationships between components.
-	•	CSS Framework Detection: Identify and report on CSS frameworks used.
-	•	Additional Archive Formats: Support for other archive types like RAR and 7Z.
-
-6.2 Monitoring and Logging
-
-	•	Performance Metrics: Introduce metrics to monitor performance and resource usage.
-	•	Detailed Logging: Implement comprehensive logging for debugging and auditing.
-	•	Analysis History: Maintain a history of analyses for future reference.
-
-Need Assistance?
-
-The tool is designed to be intuitive, but if you encounter issues:
-	•	Error Messages: Pay attention to any error messages—they provide guidance on resolving common problems.
-	•	Contact Support: Reach out to the development team for assistance with unexpected issues.
-	•	Documentation: Refer to this guide for detailed information on features and usage.
-
-Enjoy exploring your website’s inner workings with the HTML Component Scanner!
+<p><em>Enjoy exploring your website's inner workings with the HTML Component Analyzer!</em></p>
