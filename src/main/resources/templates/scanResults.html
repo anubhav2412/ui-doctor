@@ -14,12 +14,14 @@
     </header>
 
     <div class="summary">
+        <!-- Library Metrics -->
         <div class="summary__card">
             <h3 class="summary__card-title">Library Components</h3>
             <div class="summary__card-content">
                 <span class="summary__percentage" id="libraryTagPercentage">0</span>
                 <span class="summary__percentage-symbol">%</span>
             </div>
+            <p class="summary__total" id="totalLibraryTags">Total: 0</p>
         </div>
         <div class="summary__card">
             <h3 class="summary__card-title">Library Classes</h3>
@@ -27,9 +29,61 @@
                 <span class="summary__percentage" id="libraryClassPercentage">0</span>
                 <span class="summary__percentage-symbol">%</span>
             </div>
+            <p class="summary__total" id="totalLibraryClasses">Total: 0</p>
+        </div>
+
+        <!-- Native Metrics -->
+        <div class="summary__card">
+            <h3 class="summary__card-title">Native Components</h3>
+            <div class="summary__card-content">
+                <span class="summary__percentage" id="nativeTagPercentage">0</span>
+                <span class="summary__percentage-symbol">%</span>
+            </div>
+            <p class="summary__total" id="totalNativeTags">Total: 0</p>
+        </div>
+        <div class="summary__card">
+            <h3 class="summary__card-title">Native Classes</h3>
+            <div class="summary__card-content">
+                <span class="summary__percentage" id="nativeClassPercentage">0</span>
+                <span class="summary__percentage-symbol">%</span>
+            </div>
+            <p class="summary__total" id="totalNativeClasses">Total: 0</p>
+        </div>
+
+        <!-- Unique Metrics -->
+        <div class="summary__card">
+            <h3 class="summary__card-title">Unique Library Tags</h3>
+            <div class="summary__card-content">
+                <span class="summary__percentage" id="uniqueLibraryTagPercentage">0</span>
+                <span class="summary__percentage-symbol">%</span>
+            </div>
+            <p class="summary__total" id="totalUniqueLibraryTags">Total: 0</p>
+        </div>
+        <div class="summary__card">
+            <h3 class="summary__card-title">Unique Library Classes</h3>
+            <div class="summary__card-content">
+                <span class="summary__percentage" id="uniqueLibraryClassPercentage">0</span>
+                <span class="summary__percentage-symbol">%</span>
+            </div>
+            <p class="summary__total" id="totalUniqueLibraryClasses">Total: 0</p>
+        </div>
+        <div class="summary__card">
+            <h3 class="summary__card-title">Unique Native Tags</h3>
+            <div class="summary__card-content">
+                <span class="summary__percentage" id="uniqueNativeTagPercentage">0</span>
+                <span class="summary__percentage-symbol">%</span>
+            </div>
+            <p class="summary__total" id="totalUniqueNativeTags">Total: 0</p>
+        </div>
+        <div class="summary__card">
+            <h3 class="summary__card-title">Unique Native Classes</h3>
+            <div class="summary__card-content">
+                <span class="summary__percentage" id="uniqueNativeClassPercentage">0</span>
+                <span class="summary__percentage-symbol">%</span>
+            </div>
+            <p class="summary__total" id="totalUniqueNativeClasses">Total: 0</p>
         </div>
     </div>
-
     <div class="results-grid">
         <section class="results-section">
             <h2 class="results-section__title">Library Components (Tags)</h2>
@@ -84,6 +138,42 @@
                     <tr>
                         <th>Class</th>
                         <th>Occurrences</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- New Section for Component-Level Breakdown -->
+        <section class="results-section">
+            <h2 class="results-section__title">Component-Level Breakdown</h2>
+            <div class="table-container">
+                <table class="results-table" id="componentBreakdownTable">
+                    <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Library Tags</th>
+                        <th>Native Tags</th>
+                        <th>Library Classes</th>
+                        <th>Native Classes</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- New Section for Overridden Styles -->
+        <section class="results-section">
+            <h2 class="results-section__title">Overridden Styles</h2>
+            <div class="table-container">
+                <table class="results-table" id="overriddenStylesTable">
+                    <thead>
+                    <tr>
+                        <th>Selector</th>
+                        <th>Library Style</th>
+                        <th>Custom Style</th>
                     </tr>
                     </thead>
                     <tbody></tbody>

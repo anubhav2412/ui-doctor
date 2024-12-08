@@ -272,3 +272,110 @@ body {
         padding: 1.5rem 1rem;
     }
 }
+/* Component Breakdown Section */
+#componentBreakdownTable {
+    margin-top: 1.5rem;
+}
+
+.results-section__title--component {
+    color: #2563eb; /* Highlighted color for section title */
+}
+
+#componentBreakdownTable th,
+#componentBreakdownTable td {
+    text-align: center; /* Center-align content for better readability */
+}
+
+#componentBreakdownTable th {
+    font-weight: 600;
+}
+
+#componentBreakdownTable td {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Overridden Styles Section */
+#overriddenStylesTable {
+    margin-top: 1.5rem;
+}
+
+.results-section__title--styles {
+    color: #f97316; /* Highlighted color for overridden styles section */
+}
+
+#overriddenStylesTable th,
+#overriddenStylesTable td {
+    text-align: left; /* Left-align for readability in code-like content */
+}
+
+#overriddenStylesTable td {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #1e293b; /* Dark color for contrast */
+}
+
+#overriddenStylesTable td:first-child {
+    font-weight: 600; /* Bold for selectors */
+}
+
+#overriddenStylesTable tbody tr:hover {
+    background-color: rgba(249, 115, 22, 0.1); /* Subtle hover effect for overridden styles */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #componentBreakdownTable th,
+    #componentBreakdownTable td,
+    #overriddenStylesTable th,
+    #overriddenStylesTable td {
+        padding: 0.5rem;
+        font-size: 0.875rem; /* Slightly smaller font for mobile */
+    }
+}/* Component-Level Breakdown Styles */
+.results-section__title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.results-table th,
+.results-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+}
+
+.results-table th {
+    background-color: #f1f5f9;
+    font-weight: bold;
+    color: #1e293b;
+}
+
+.results-table td {
+    background-color: #ffffff;
+}
+
+.results-table .tag-list,
+.results-table .class-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.results-table .tag-list li,
+.results-table .class-list li {
+    margin-bottom: 0.25rem;
+    font-family: 'Courier New', monospace;
+    color: #4b5563;
+}
+
+.results-table .highlight {
+    font-weight: bold;
+    color: #2563eb;
+}
