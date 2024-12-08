@@ -1,41 +1,62 @@
+/* Variables
+----------------------------------------- */
 :root {
-    --primary-color: #2563eb;
+    /* Colors */
+    --primary-color: #4f46e5;
     --secondary-color: #3b82f6;
-    --background-color: #f8fafc;
+    --primary-hover: #3730a3;
+    --primary-active: #312e81;
+
+    /* Backgrounds */
+    --background-color: #f3f4f6;
     --card-background: #ffffff;
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --border-color: #e2e8f0;
-    --success-color: #22c55e;
-    --warning-color: #eab308;
+
+    /* Text Colors */
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --button-text: #ffffff;
+
+    /* Utility Colors */
+    --border-color: #d1d5db;
+    --success-color: #16a34a;
+    --warning-color: #facc15;
+    --button-shadow: rgba(79, 70, 229, 0.2);
+    --gradient-accent: linear-gradient(45deg, #4f46e5, #3b82f6);
+    --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
+/* Reset & Base Styles
+----------------------------------------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
 }
 
 body {
     background-color: var(--background-color);
     color: var(--text-primary);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
+/* Layout
+----------------------------------------- */
 .container {
-    max-width: 1400px;
-    margin: 0 auto;
+    max-width: 1440px;
+    margin: auto;
     padding: 2rem;
 }
 
+/* Header Styles
+----------------------------------------- */
 .header {
     text-align: center;
     margin-bottom: 3rem;
     padding: 2rem;
     background: var(--card-background);
     border-radius: 1rem;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    box-shadow: var(--box-shadow);
 }
 
 .header__title {
@@ -49,6 +70,107 @@ body {
     font-size: 1.1rem;
 }
 
+/* Upload Components
+----------------------------------------- */
+.upload__card {
+    background: var(--card-background);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+}
+
+.upload__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.upload__dropzone {
+    position: relative;
+    border: 2px dashed var(--border-color);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(243, 244, 246, 0.8));
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: var(--box-shadow);
+}
+
+.upload__dropzone:hover,
+.upload__dropzone--active {
+    border-color: var(--primary-color);
+    background-color: #f8fafc;
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+}
+
+.upload__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Button Styles
+----------------------------------------- */
+.upload__button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: var(--gradient-accent);
+    color: var(--button-text);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    min-width: 140px;
+    transition: all 0.3s ease;
+    box-shadow: var(--box-shadow);
+}
+
+.upload__button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.3);
+}
+
+.upload__button:active {
+    background: var(--primary-active);
+    transform: translateY(0);
+    box-shadow: var(--box-shadow);
+}
+
+.upload__button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    background: var(--primary-color);
+    box-shadow: none;
+}
+
+.upload__button svg {
+    margin-right: 0.5rem;
+    width: 18px;
+    height: 18px;
+}
+
+/* Metrics Grid
+----------------------------------------- */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -60,12 +182,13 @@ body {
     background: var(--card-background);
     padding: 1.5rem;
     border-radius: 1rem;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    transition: transform 0.2s;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .metric-card:hover {
     transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(79, 70, 229, 0.15);
 }
 
 .metric-card__title {
@@ -92,6 +215,39 @@ body {
     margin-top: 0.5rem;
 }
 
+/* Charts Grid
+----------------------------------------- */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.chart-section {
+    background: var(--card-background);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+    min-width: 0;
+}
+
+.chart-section:hover {
+    transform: scale(1.02);
+}
+
+.chart-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Results Grid
+----------------------------------------- */
 .results-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -102,11 +258,7 @@ body {
     background: var(--card-background);
     border-radius: 1rem;
     padding: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
-
-.full-width {
-    grid-column: 1 / -1;
+    box-shadow: var(--box-shadow);
 }
 
 .results-section__title {
@@ -117,6 +269,8 @@ body {
     border-bottom: 2px solid var(--border-color);
 }
 
+/* Table Styles
+----------------------------------------- */
 .table-container {
     overflow-x: auto;
 }
@@ -143,14 +297,10 @@ body {
     background: var(--background-color);
 }
 
-.tag-list, .class-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.tag-list li, .class-list li {
-    margin-bottom: 0.5rem;
+/* Utility Classes
+----------------------------------------- */
+.full-width {
+    grid-column: 1 / -1;
 }
 
 .highlight {
@@ -168,6 +318,38 @@ body {
     text-align: center;
 }
 
+/* Loading Animation
+----------------------------------------- */
+.upload__button--loading {
+    position: relative;
+    cursor: wait;
+}
+
+.upload__button--loading:after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin-left: 0.5rem;
+    border: 2px solid var(--button-text);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: button-loading 0.6s linear infinite;
+}
+
+@keyframes button-loading {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Media Queries
+----------------------------------------- */
+@media (max-width: 1200px) {
+    .charts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
@@ -180,44 +362,9 @@ body {
     .results-grid {
         grid-template-columns: 1fr;
     }
-}
-/* Update these styles in your existing styles.css file */
 
-.charts-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);  /* Changed to three columns */
-    gap: 1.5rem;  /* Reduced gap slightly */
-    margin: 2rem 0;
-    width: 100%;
-}
-
-.chart-section {
-    background: var(--card-background);
-    border-radius: 1rem;
-    padding: 1.25rem;  /* Slightly reduced padding */
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s ease;
-    min-width: 0;
-}
-
-.chart-title {
-    font-size: 1.1rem;  /* Slightly smaller title */
-    margin-bottom: 0.75rem;
-}
-
-/* Update responsive breakpoints */
-@media (max-width: 1200px) {
     .charts-grid {
-        grid-template-columns: repeat(2, 1fr); /* Two charts per row on medium screens */
-    }
-}
-
-@media (max-width: 768px) {
-    .charts-grid {
-        grid-template-columns: 1fr; /* One chart per row on mobile */
+        grid-template-columns: 1fr;
     }
 
     .chart-section {
