@@ -37,7 +37,7 @@ public class HTMLScanController {
         // Process the zip file and get the scan results
         Map<String, Object> result = htmlScannerService.processZipFile(file);
 
-        // Add scan results and percentages to the model
+        // Add general scan results to the model
         model.addAttribute("libraryComponents", result.get("libraryComponents"));
         model.addAttribute("nativeComponents", result.get("nativeComponents"));
         model.addAttribute("libraryClasses", result.get("libraryClasses"));
@@ -45,13 +45,35 @@ public class HTMLScanController {
         model.addAttribute("libraryTagPercentage", result.get("libraryTagPercentage"));
         model.addAttribute("libraryClassPercentage", result.get("libraryClassPercentage"));
 
+        // Add component-level breakdown to the model
+        if (result.containsKey("componentBreakdown")) {
+            model.addAttribute("componentBreakdown", result.get("componentBreakdown"));
+        }
+
+        // Add overridden styles analysis to the model
+        if (result.containsKey("overriddenStyles")) {
+            model.addAttribute("overriddenStyles", result.get("overriddenStyles"));
+        }
+
         return "scanResults";  // Returns the HTML template to display results
     }
 
-    // Additional endpoint to provide scan results in JSON format for scripts.js
+    // Endpoint to provide scan results in JSON format for scripts.js
     @GetMapping("/api/scanResults")
     @ResponseBody
     public Map<String, Object> getScanResults() {
-        return htmlScannerService.getLatestResults();  // Adjust as needed to retrieve the latest results
+        Map<String, Object> latestResults = htmlScannerService.getLatestResults();
+
+        // Include additional details if available
+        if (latestResults != null) {
+            if (latestResults.containsKey("componentBreakdown")) {
+                latestResults.put("componentBreakdown", latestResults.get("componentBreakdown"));
+            }
+            if (latestResults.containsKey("overriddenStyles")) {
+                latestResults.put("overriddenStyles", latestResults.get("overriddenStyles"));
+            }
+        }
+
+        return latestResults;
     }
 }
