@@ -1,3 +1,98 @@
+const metricTableMap = {
+    'libraryTagPercentage': 'libraryComponentsTable',
+    'nativeTagPercentage': 'nativeComponentsTable',
+    'libraryClassPercentage': 'libraryClassesTable',
+    'nativeClassPercentage': 'nativeClassesTable',
+    'uniqueLibraryTagPercentage': 'libraryComponentsTable',
+    'uniqueNativeTagPercentage': 'nativeComponentsTable',
+    'uniqueLibraryClassPercentage': 'libraryClassesTable',
+    'uniqueNativeClassPercentage': 'nativeClassesTable',
+    'overriddenStyles': 'overriddenStylesTable'
+};
+
+// Add this to your existing DOMContentLoaded event listener
+function initializeMetricCardLinks() {
+    // Track active elements
+    let activeCard = null;
+    let activeTable = null;
+
+    // Add click handlers to all metric cards
+    document.querySelectorAll('.metric-card').forEach(card => {
+        // Find the percentage element inside this card to get its ID
+        const percentageEl = card.querySelector('[id$="Percentage"], [id="overriddenStyles"]');
+        if (!percentageEl) return;
+
+        const tableId = metricTableMap[percentageEl.id];
+        if (!tableId) return;
+
+        // Make the card clickable
+        card.style.cursor = 'pointer';
+
+        card.addEventListener('click', () => {
+            // Remove active state from previous elements
+            if (activeCard) {
+                activeCard.classList.remove('active-card');
+                activeCard.style.boxShadow = 'none';
+            }
+            if (activeTable) {
+                activeTable.classList.remove('active-table');
+                activeTable.style.boxShadow = 'none';
+            }
+
+            // Get the corresponding table
+            const targetTable = document.getElementById(tableId);
+            if (!targetTable) return;
+
+            // If clicking the same card, deactivate everything
+            if (activeCard === card) {
+                activeCard = null;
+                activeTable = null;
+                return;
+            }
+
+            // Add active state to new elements
+            card.classList.add('active-card');
+            card.style.boxShadow = '0 0 0 2px #3b82f6';
+            targetTable.classList.add('active-table');
+            targetTable.style.boxShadow = '0 0 0 2px #3b82f6';
+
+            // Scroll table into view
+            targetTable.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Update active elements
+            activeCard = card;
+            activeTable = targetTable;
+        });
+
+        // Add hover effect
+        card.addEventListener('mouseenter', () => {
+            if (card !== activeCard) {
+                card.style.boxShadow = '0 0 0 2px #93c5fd';
+            }
+        });
+
+        card.addEventListener('mouseleave', () => {
+            if (card !== activeCard) {
+                card.style.boxShadow = 'none';
+            }
+        });
+    });
+
+    // Add CSS for transitions
+    const style = document.createElement('style');
+    style.textContent = `
+        .metric-card {
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .results-table {
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .active-card, .active-table {
+            transition: box-shadow 0.2s ease-in-out;
+        }
+    `;
+    document.head.appendChild(style);
+}
 document.addEventListener("DOMContentLoaded", function () {
     const apiUrl = "/api/scanResults";
 
@@ -7,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
             updateMetrics(data);
             updateTables(data);
             createPieCharts(data);
+            initializeMetricCardLinks();
         })
         .catch((error) => {
             console.error("Error fetching scan results:", error);
@@ -23,7 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
             uniqueLibraryTags,
             uniqueNativeTags,
             uniqueLibraryClasses,
-            uniqueNativeClasses
+            uniqueNativeClasses,
+            overriddenStyles
         } = calculateTotals(data);
 
         // Calculate percentages
@@ -35,11 +132,12 @@ document.addEventListener("DOMContentLoaded", function () {
             uniqueLibraryTags,
             uniqueNativeTags,
             uniqueLibraryClasses,
-            uniqueNativeClasses
+            uniqueNativeClasses,
+            overriddenStyles
         });
-
         // Update DOM
         updateDOMElements(metrics);
+        console.log(metrics);
     }
 
     function calculateTotals(data) {
@@ -51,7 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
             uniqueLibraryTags: Object.keys(data.libraryComponents || {}).length,
             uniqueNativeTags: Object.keys(data.nativeComponents || {}).length,
             uniqueLibraryClasses: Object.keys(data.libraryClasses || {}).length,
-            uniqueNativeClasses: Object.keys(data.nativeClasses || {}).length
+            uniqueNativeClasses: Object.keys(data.nativeClasses || {}).length,
+            overriddenStyles: Object.keys(data.overriddenStyles || {}).length
         };
     }
 
@@ -60,6 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const totalClasses = totals.totalLibraryClasses + totals.totalNativeClasses;
         const totalUniqueTags = totals.uniqueLibraryTags + totals.uniqueNativeTags;
         const totalUniqueClasses = totals.uniqueLibraryClasses + totals.uniqueNativeClasses;
+
 
         return {
             libraryTagPercentage: calculatePercentage(totals.totalLibraryTags, totalTags),
@@ -70,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
             uniqueNativeTagPercentage: calculatePercentage(totals.uniqueNativeTags, totalUniqueTags),
             uniqueLibraryClassPercentage: calculatePercentage(totals.uniqueLibraryClasses, totalUniqueClasses),
             uniqueNativeClassPercentage: calculatePercentage(totals.uniqueNativeClasses, totalUniqueClasses),
+            overriddenStylesPercentage: calculatePercentage(totals.overriddenStyles, totalClasses) ,// Use totalUniqueTags as it's a more relevant total
             ...totals
         };
     }

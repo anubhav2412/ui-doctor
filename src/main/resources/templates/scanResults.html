@@ -62,7 +62,7 @@
                 <span class="metric-card__percentage" id="uniqueLibraryTagPercentage">0</span>
                 <span class="metric-card__symbol">%</span>
             </div>
-            <p class="metric-card__total" id="totalUniqueLibraryTags">Total: 0</p>
+            <p class="metric-card__total" id="uniqueLibraryTags">Total: 0</p>
         </div>
 
         <div class="metric-card">
@@ -71,7 +71,7 @@
                 <span class="metric-card__percentage" id="uniqueNativeTagPercentage">0</span>
                 <span class="metric-card__symbol">%</span>
             </div>
-            <p class="metric-card__total" id="totalUniqueNativeTags">Total: 0</p>
+            <p class="metric-card__total" id="uniqueNativeTags">Total: 0</p>
         </div>
 
         <div class="metric-card">
@@ -80,7 +80,7 @@
                 <span class="metric-card__percentage" id="uniqueLibraryClassPercentage">0</span>
                 <span class="metric-card__symbol">%</span>
             </div>
-            <p class="metric-card__total" id="totalUniqueLibraryClasses">Total: 0</p>
+            <p class="metric-card__total" id="uniqueLibraryClasses">Total: 0</p>
         </div>
 
         <div class="metric-card">
@@ -89,9 +89,32 @@
                 <span class="metric-card__percentage" id="uniqueNativeClassPercentage">0</span>
                 <span class="metric-card__symbol">%</span>
             </div>
-            <p class="metric-card__total" id="totalUniqueNativeClasses">Total: 0</p>
+            <p class="metric-card__total" id="uniqueNativeClasses">Total: 0</p>
+        </div>
+        <div class="metric-card">
+            <h3 class="metric-card__title">Library Css Overrides</h3>
+            <div class="metric-card__content">
+                <span class="metric-card__percentage" id="overriddenStyles">0</span>
+
+            </div>
+
         </div>
     </div>
+    <section class="results-section full-width">
+        <h2 class="results-section__title">Overridden Styles</h2>
+        <div class="table-container">
+            <table class="results-table" id="overriddenStylesTable">
+                <thead>
+                <tr>
+                    <th>Selector</th>
+                    <th>Library Style</th>
+                    <th>Custom Style</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
 
     <div class="results-grid">
         <!-- Rest of the tables remain the same -->
@@ -173,21 +196,7 @@
             </div>
         </section>
 
-        <section class="results-section full-width">
-            <h2 class="results-section__title">Overridden Styles</h2>
-            <div class="table-container">
-                <table class="results-table" id="overriddenStylesTable">
-                    <thead>
-                    <tr>
-                        <th>Selector</th>
-                        <th>Library Style</th>
-                        <th>Custom Style</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
+
     </div>
 </div>
 <script src="scripts.js"></script>
