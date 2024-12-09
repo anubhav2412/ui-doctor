@@ -17,7 +17,7 @@ import java.util.Map;
 @Service
 public class HTMLScannerService {
 
-    private static final String LIBRARY_PREFIX = "dsps-";
+    private static final String LIBRARY_PREFIX = "app-";
     private Map<String, Object> latestResults;
 
     public Map<String, Object> processZipFile(MultipartFile file) throws IOException {
