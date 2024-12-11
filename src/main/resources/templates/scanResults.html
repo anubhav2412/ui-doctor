@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="metrics-grid">
-        <!-- Regular Metrics -->
+        <!-- Existing Metrics -->
         <div class="metric-card">
             <h3 class="metric-card__title">Library Components</h3>
             <div class="metric-card__content">
@@ -91,15 +91,31 @@
             </div>
             <p class="metric-card__total" id="uniqueNativeClasses">Total: 0</p>
         </div>
+
         <div class="metric-card">
             <h3 class="metric-card__title">Library Css Overrides</h3>
             <div class="metric-card__content">
                 <span class="metric-card__percentage" id="overriddenStyles">0</span>
-
             </div>
-
         </div>
+
+        <!-- New Metrics for Library Code Lines and APIs -->
+        <div class="metric-card">
+            <h3 class="metric-card__title">Library Code Lines</h3>
+            <div class="metric-card__content">
+                <span class="metric-card__percentage" id="totalLibraryCodeLines">Total: 0</span>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <h3 class="metric-card__title">Library APIs</h3>
+            <div class="metric-card__content">
+                <span class="metric-card__percentage" id="totalLibraryAPIs">Total: 0</span>
+            </div>
+        </div>
+
     </div>
+
     <section class="results-section full-width">
         <h2 class="results-section__title">Overridden Styles</h2>
         <div class="table-container">
@@ -117,7 +133,6 @@
     </section>
 
     <div class="results-grid">
-        <!-- Rest of the tables remain the same -->
         <section class="results-section">
             <h2 class="results-section__title">Library Components</h2>
             <div class="table-container">
@@ -196,7 +211,66 @@
             </div>
         </section>
 
+        <!-- New Tables for Library Code Lines and APIs -->
+        <section class="results-section">
+            <h2 class="results-section__title">Total Library Code Lines</h2>
+            <div class="table-container">
+                <table class="results-table" id="totalLibraryCodeLinesTable">
+                    <thead>
+                    <tr>
+                        <th>Tag</th>
+                        <th>Lines</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
 
+        <section class="results-section">
+            <h2 class="results-section__title">Total Library APIs</h2>
+            <div class="table-container">
+                <table class="results-table" id="totalLibraryAPIsTable">
+                    <thead>
+                    <tr>
+                        <th>API (attr=value)</th>
+                        <th>Count</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <h2 class="results-section__title">Component Library Code Lines</h2>
+            <div class="table-container">
+                <table class="results-table" id="componentLibraryCodeLinesTable">
+                    <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Tag -> Lines</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <h2 class="results-section__title">Component Library APIs</h2>
+            <div class="table-container">
+                <table class="results-table" id="componentLibraryAPIsTable">
+                    <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>API -> Count</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
     </div>
 </div>
 <script src="scripts.js"></script>

@@ -1,98 +1,3 @@
-const metricTableMap = {
-    'libraryTagPercentage': 'libraryComponentsTable',
-    'nativeTagPercentage': 'nativeComponentsTable',
-    'libraryClassPercentage': 'libraryClassesTable',
-    'nativeClassPercentage': 'nativeClassesTable',
-    'uniqueLibraryTagPercentage': 'libraryComponentsTable',
-    'uniqueNativeTagPercentage': 'nativeComponentsTable',
-    'uniqueLibraryClassPercentage': 'libraryClassesTable',
-    'uniqueNativeClassPercentage': 'nativeClassesTable',
-    'overriddenStyles': 'overriddenStylesTable'
-};
-
-// Add this to your existing DOMContentLoaded event listener
-function initializeMetricCardLinks() {
-    // Track active elements
-    let activeCard = null;
-    let activeTable = null;
-
-    // Add click handlers to all metric cards
-    document.querySelectorAll('.metric-card').forEach(card => {
-        // Find the percentage element inside this card to get its ID
-        const percentageEl = card.querySelector('[id$="Percentage"], [id="overriddenStyles"]');
-        if (!percentageEl) return;
-
-        const tableId = metricTableMap[percentageEl.id];
-        if (!tableId) return;
-
-        // Make the card clickable
-        card.style.cursor = 'pointer';
-
-        card.addEventListener('click', () => {
-            // Remove active state from previous elements
-            if (activeCard) {
-                activeCard.classList.remove('active-card');
-                activeCard.style.boxShadow = 'none';
-            }
-            if (activeTable) {
-                activeTable.classList.remove('active-table');
-                activeTable.style.boxShadow = 'none';
-            }
-
-            // Get the corresponding table
-            const targetTable = document.getElementById(tableId);
-            if (!targetTable) return;
-
-            // If clicking the same card, deactivate everything
-            if (activeCard === card) {
-                activeCard = null;
-                activeTable = null;
-                return;
-            }
-
-            // Add active state to new elements
-            card.classList.add('active-card');
-            card.style.boxShadow = '0 0 0 2px #3b82f6';
-            targetTable.classList.add('active-table');
-            targetTable.style.boxShadow = '0 0 0 2px #3b82f6';
-
-            // Scroll table into view
-            targetTable.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-            // Update active elements
-            activeCard = card;
-            activeTable = targetTable;
-        });
-
-        // Add hover effect
-        card.addEventListener('mouseenter', () => {
-            if (card !== activeCard) {
-                card.style.boxShadow = '0 0 0 2px #93c5fd';
-            }
-        });
-
-        card.addEventListener('mouseleave', () => {
-            if (card !== activeCard) {
-                card.style.boxShadow = 'none';
-            }
-        });
-    });
-
-    // Add CSS for transitions
-    const style = document.createElement('style');
-    style.textContent = `
-        .metric-card {
-            transition: box-shadow 0.2s ease-in-out;
-        }
-        .results-table {
-            transition: box-shadow 0.2s ease-in-out;
-        }
-        .active-card, .active-table {
-            transition: box-shadow 0.2s ease-in-out;
-        }
-    `;
-    document.head.appendChild(style);
-}
 document.addEventListener("DOMContentLoaded", function () {
     const apiUrl = "/api/scanResults";
 
@@ -109,35 +14,107 @@ document.addEventListener("DOMContentLoaded", function () {
             showErrorMessage();
         });
 
-    function updateMetrics(data) {
-        // Calculate all metrics
-        const {
-            totalLibraryTags,
-            totalNativeTags,
-            totalLibraryClasses,
-            totalNativeClasses,
-            uniqueLibraryTags,
-            uniqueNativeTags,
-            uniqueLibraryClasses,
-            uniqueNativeClasses,
-            overriddenStyles
-        } = calculateTotals(data);
+    // Maps metric element IDs to their corresponding tables
+    const metricTableMap = {
+        'libraryTagPercentage': 'libraryComponentsTable',
+        'nativeTagPercentage': 'nativeComponentsTable',
+        'libraryClassPercentage': 'libraryClassesTable',
+        'nativeClassPercentage': 'nativeClassesTable',
+        'uniqueLibraryTagPercentage': 'libraryComponentsTable',
+        'uniqueNativeTagPercentage': 'nativeComponentsTable',
+        'uniqueLibraryClassPercentage': 'libraryClassesTable',
+        'uniqueNativeClassPercentage': 'nativeClassesTable',
+        'overriddenStyles': 'overriddenStylesTable'
+    };
 
-        // Calculate percentages
-        const metrics = calculatePercentages({
-            totalLibraryTags,
-            totalNativeTags,
-            totalLibraryClasses,
-            totalNativeClasses,
-            uniqueLibraryTags,
-            uniqueNativeTags,
-            uniqueLibraryClasses,
-            uniqueNativeClasses,
-            overriddenStyles
+    function initializeMetricCardLinks() {
+        let activeCard = null;
+        let activeTable = null;
+
+        document.querySelectorAll('.metric-card').forEach(card => {
+            const percentageEl = card.querySelector('[id$="Percentage"], [id="overriddenStyles"], [id="totalLibraryCodeLines"], [id="totalLibraryAPIs"]');
+            if (!percentageEl) return;
+
+            const tableId = metricTableMap[percentageEl.id];
+            // Some metrics (like totalLibraryCodeLines or totalLibraryAPIs) may not have corresponding tables
+            // If no tableId found, skip linking
+            if (!tableId) return;
+
+            card.style.cursor = 'pointer';
+
+            card.addEventListener('click', () => {
+                if (activeCard) {
+                    activeCard.classList.remove('active-card');
+                    activeCard.style.boxShadow = 'none';
+                }
+                if (activeTable) {
+                    activeTable.classList.remove('active-table');
+                    activeTable.style.boxShadow = 'none';
+                }
+
+                const targetTable = document.getElementById(tableId);
+                if (!targetTable) return;
+
+                if (activeCard === card) {
+                    activeCard = null;
+                    activeTable = null;
+                    return;
+                }
+
+                card.classList.add('active-card');
+                card.style.boxShadow = '0 0 0 2px #3b82f6';
+                targetTable.classList.add('active-table');
+                targetTable.style.boxShadow = '0 0 0 2px #3b82f6';
+
+                targetTable.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                activeCard = card;
+                activeTable = targetTable;
+            });
+
+            card.addEventListener('mouseenter', () => {
+                if (card !== activeCard) {
+                    card.style.boxShadow = '0 0 0 2px #93c5fd';
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                if (card !== activeCard) {
+                    card.style.boxShadow = 'none';
+                }
+            });
         });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            .metric-card {
+                transition: box-shadow 0.2s ease-in-out;
+            }
+            .results-table {
+                transition: box-shadow 0.2s ease-in-out;
+            }
+            .active-card, .active-table {
+                transition: box-shadow 0.2s ease-in-out;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    function updateMetrics(data) {
+        // Calculate totals
+        const totals = calculateTotals(data);
+        // Calculate percentages
+        const metrics = calculatePercentages(totals);
+
+        // Merge totals and percentages into one object
+        // The calculatePercentages function returns percentages and also
+        // re-include totals to be displayed as "Total: X"
+        const allMetrics = {
+            ...metrics
+        };
+
         // Update DOM
-        updateDOMElements(metrics);
-        console.log(metrics);
+        updateDOMElements(allMetrics);
     }
 
     function calculateTotals(data) {
@@ -150,7 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
             uniqueNativeTags: Object.keys(data.nativeComponents || {}).length,
             uniqueLibraryClasses: Object.keys(data.libraryClasses || {}).length,
             uniqueNativeClasses: Object.keys(data.nativeClasses || {}).length,
-            overriddenStyles: Object.keys(data.overriddenStyles || {}).length
+            overriddenStyles: Object.keys(data.overriddenStyles || {}).length,
+            // Additional totals
+            totalLibraryCodeLines: sumValues(data.totalLibraryCodeLines),
+            totalLibraryAPIs: sumValues(data.totalLibraryAPIs)
         };
     }
 
@@ -160,8 +140,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const totalUniqueTags = totals.uniqueLibraryTags + totals.uniqueNativeTags;
         const totalUniqueClasses = totals.uniqueLibraryClasses + totals.uniqueNativeClasses;
 
-
         return {
+            ...totals,
             libraryTagPercentage: calculatePercentage(totals.totalLibraryTags, totalTags),
             nativeTagPercentage: calculatePercentage(totals.totalNativeTags, totalTags),
             libraryClassPercentage: calculatePercentage(totals.totalLibraryClasses, totalClasses),
@@ -169,9 +149,9 @@ document.addEventListener("DOMContentLoaded", function () {
             uniqueLibraryTagPercentage: calculatePercentage(totals.uniqueLibraryTags, totalUniqueTags),
             uniqueNativeTagPercentage: calculatePercentage(totals.uniqueNativeTags, totalUniqueTags),
             uniqueLibraryClassPercentage: calculatePercentage(totals.uniqueLibraryClasses, totalUniqueClasses),
-            uniqueNativeClassPercentage: calculatePercentage(totals.uniqueNativeClasses, totalUniqueClasses),
-            overriddenStylesPercentage: calculatePercentage(totals.overriddenStyles, totalClasses) ,// Use totalUniqueTags as it's a more relevant total
-            ...totals
+            uniqueNativeClassPercentage: calculatePercentage(totals.uniqueNativeClasses, totalUniqueClasses)
+            // Note: We don't have a meaningful denominator for overriddenStylesPercentage
+            // or totalLibraryCodeLines / totalLibraryAPIs percentages, so we skip those.
         };
     }
 
@@ -180,17 +160,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateDOMElements(metrics) {
+        // If the key includes 'Percentage', display as percentage
+        // Otherwise display totals as "Total: X"
         Object.entries(metrics).forEach(([key, value]) => {
             const element = document.getElementById(key);
             if (element) {
                 if (key.includes('Percentage')) {
                     element.textContent = value;
                 } else {
+                    // For totals (like totalLibraryTags), show "Total: X"
+                    // If this is a pure total metric, just display the numeric value prefixed with "Total: "
                     element.textContent = `Total: ${value}`;
                 }
             }
         });
     }
+
     function updateTables(data) {
         populateTable('libraryComponentsTable', data.libraryComponents);
         populateTable('nativeComponentsTable', data.nativeComponents);
@@ -198,15 +183,21 @@ document.addEventListener("DOMContentLoaded", function () {
         populateTable('nativeClassesTable', data.nativeClasses);
         populateComponentBreakdown('componentBreakdownTable', data.componentBreakdown);
         populateOverriddenStyles('overriddenStylesTable', data.overriddenStyles);
+
+        // New tables for library code lines and APIs totals
+        populateTable('totalLibraryCodeLinesTable', data.totalLibraryCodeLines);
+        populateTable('totalLibraryAPIsTable', data.totalLibraryAPIs);
+
+        // Component-level details for library code lines and APIs
+        populateComponentDetails('componentLibraryCodeLinesTable', data.componentLibraryCodeLines);
+        populateComponentDetails('componentLibraryAPIsTable', data.componentLibraryAPIs);
     }
 
     function populateTable(tableId, data) {
         const tbody = document.querySelector(`#${tableId} tbody`);
         if (!tbody) return;
-
         tbody.innerHTML = '';
 
-        // Sort data by count in descending order
         const sortedData = Object.entries(data || {})
             .sort(([, a], [, b]) => b - a);
 
@@ -217,9 +208,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
             nameCell.textContent = key;
             countCell.textContent = value;
-
-            // Add hover effect class
             row.classList.add('table-row-hover');
+        });
+    }
+
+    // For component-level details like code lines and APIs, we have a nested map: component -> {itemName: count}
+    function populateComponentDetails(tableId, data) {
+        const tbody = document.querySelector(`#${tableId} tbody`);
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        // data: { componentName: { tagOrApi: count, ... }, ... }
+        Object.entries(data || {}).forEach(([component, details]) => {
+            const row = tbody.insertRow();
+            const compCell = row.insertCell(0);
+            const detailsCell = row.insertCell(1);
+
+            compCell.textContent = component;
+
+            if (!details || Object.keys(details).length === 0) {
+                detailsCell.innerHTML = '<span class="empty-list">None</span>';
+            } else {
+                detailsCell.innerHTML = Object.entries(details)
+                    .map(([key, val]) => `<div class="list-item"><span class="highlight">${key}</span>: ${val}</div>`)
+                    .join('');
+            }
         });
     }
 
@@ -232,23 +245,18 @@ document.addEventListener("DOMContentLoaded", function () {
         Object.entries(breakdown || {}).forEach(([component, details]) => {
             const row = tbody.insertRow();
 
-            // Component name
             const componentCell = row.insertCell(0);
             componentCell.textContent = component;
 
-            // Library Tags
             const libraryTagsCell = row.insertCell(1);
             libraryTagsCell.innerHTML = formatList(details.libraryComponents);
 
-            // Native Tags
             const nativeTagsCell = row.insertCell(2);
             nativeTagsCell.innerHTML = formatList(details.nativeComponents);
 
-            // Library Classes
             const libraryClassesCell = row.insertCell(3);
             libraryClassesCell.innerHTML = formatList(details.libraryClasses);
 
-            // Native Classes
             const nativeClassesCell = row.insertCell(4);
             nativeClassesCell.innerHTML = formatList(details.nativeClasses);
         });
@@ -263,19 +271,15 @@ document.addEventListener("DOMContentLoaded", function () {
         Object.entries(styles || {}).forEach(([selector, details]) => {
             const row = tbody.insertRow();
 
-            // Selector
             const selectorCell = row.insertCell(0);
             selectorCell.textContent = selector;
 
-            // Library styles
             const libraryStyleCell = row.insertCell(1);
             libraryStyleCell.innerHTML = formatStyles(details.library);
 
-            // Custom styles
             const customStyleCell = row.insertCell(2);
             customStyleCell.innerHTML = formatStyles(details.custom);
 
-            // Highlight overridden properties
             highlightOverrides(libraryStyleCell, customStyleCell);
         });
     }
@@ -323,16 +327,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function sumValues(obj) {
         if (!obj || typeof obj !== 'object') return 0;
-        return Object.values(obj).reduce((sum, val) => sum + val, 0);
+        return Object.values(obj).reduce((sum, val) => {
+            const numVal = Number(val);
+            return sum + (isNaN(numVal) ? 0 : numVal);
+        }, 0);
     }
 
-    function showErrorMessage() {
+    function showErrorMessage(message = 'Error loading data. Please try again later.') {
         const container = document.querySelector('.container');
         if (!container) return;
 
         const error = document.createElement('div');
         error.className = 'error-message';
-        error.textContent = 'Error loading data. Please try again later.';
+        error.textContent = message;
 
         const existingError = container.querySelector('.error-message');
         if (existingError) {
@@ -341,7 +348,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         container.insertBefore(error, container.firstChild);
     }
-
 
     function createPieChart(title, data, container) {
         const chartSection = document.createElement('div');
@@ -363,11 +369,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const centerY = canvas.height / 2;
         const radius = Math.min(centerX, centerY) * 0.8;
 
-        // Draw pie slices
         data.forEach(item => {
             const sliceAngle = (2 * Math.PI * item.value) / total;
 
-            // Draw slice
             ctx.beginPath();
             ctx.fillStyle = item.color;
             ctx.moveTo(centerX, centerY);
@@ -375,20 +379,15 @@ document.addEventListener("DOMContentLoaded", function () {
             ctx.closePath();
             ctx.fill();
 
-            // Calculate label position
             const midAngle = startAngle + sliceAngle / 2;
             const percentage = ((item.value / total) * 100).toFixed(1);
 
-            // Position for label box
             const labelRadius = radius * 0.65;
             const labelX = centerX + Math.cos(midAngle) * labelRadius;
             const labelY = centerY + Math.sin(midAngle) * labelRadius;
 
-            // Draw label box and text
             ctx.save();
             ctx.translate(labelX, labelY);
-
-            // Set up text for measurement
             ctx.font = 'bold 12px Arial';
             const text = `${percentage}%`;
             const textMetrics = ctx.measureText(text);
@@ -397,11 +396,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const boxWidth = textWidth + (boxPadding * 2);
             const boxHeight = 16;
 
-            // Draw black background box - no rotation
             ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
             ctx.fillRect(-boxWidth/2, -boxHeight/2, boxWidth, boxHeight);
 
-            // Draw white text
             ctx.fillStyle = '#FFFFFF';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
@@ -412,7 +409,6 @@ document.addEventListener("DOMContentLoaded", function () {
             startAngle += sliceAngle;
         });
 
-        // Create legend
         const legend = document.createElement('div');
         legend.className = 'chart-legend';
 
@@ -421,10 +417,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const legendItem = document.createElement('div');
             legendItem.className = 'legend-item';
             legendItem.innerHTML = `
-            <span class="legend-color" style="background-color: ${item.color}"></span>
-            <span class="legend-label">${item.name}</span>
-            <span class="legend-value">${item.value.toLocaleString()} (${percentage}%)</span>
-        `;
+                <span class="legend-color" style="background-color: ${item.color}"></span>
+                <span class="legend-label">${item.name}</span>
+                <span class="legend-value">${item.value.toLocaleString()} (${percentage}%)</span>
+            `;
             legend.appendChild(legendItem);
         });
 
@@ -433,7 +429,6 @@ document.addEventListener("DOMContentLoaded", function () {
         container.appendChild(chartSection);
     }
 
-// Then define createPieCharts
     function createPieCharts(data) {
         if (!data || typeof data !== 'object') {
             console.error('Invalid data format');
@@ -465,7 +460,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const nativeClasses = data.nativeClasses || {};
 
         try {
-            // Create Total Components Chart
             createPieChart(
                 'Total Components',
                 [
@@ -475,7 +469,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 metricsContainer
             );
 
-            // Create Total Classes Chart
             createPieChart(
                 'Total Classes',
                 [
@@ -485,7 +478,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 metricsContainer
             );
 
-            // Create Unique Components Chart
             createPieChart(
                 'Unique Components',
                 [
@@ -507,57 +499,4 @@ document.addEventListener("DOMContentLoaded", function () {
             showErrorMessage('Error creating charts. Please check the console for details.');
         }
     }
-
-// Update the error message function to accept custom messages
-    function showErrorMessage(message = 'Error loading data. Please try again later.') {
-        const container = document.querySelector('.container');
-        if (!container) return;
-
-        const error = document.createElement('div');
-        error.className = 'error-message';
-        error.textContent = message;
-
-        const existingError = container.querySelector('.error-message');
-        if (existingError) {
-            existingError.remove();
-        }
-
-        container.insertBefore(error, container.firstChild);
-    }
-
-// Helper function with better error handling
-    function sumValues(obj) {
-        if (!obj || typeof obj !== 'object') return 0;
-        return Object.values(obj).reduce((sum, val) => {
-            const numVal = Number(val);
-            return sum + (isNaN(numVal) ? 0 : numVal);
-        }, 0);
-    }
-
-// Update the error message function to accept custom messages
-    function showErrorMessage(message = 'Error loading data. Please try again later.') {
-        const container = document.querySelector('.container');
-        if (!container) return;
-
-        const error = document.createElement('div');
-        error.className = 'error-message';
-        error.textContent = message;
-
-        const existingError = container.querySelector('.error-message');
-        if (existingError) {
-            existingError.remove();
-        }
-
-        container.insertBefore(error, container.firstChild);
-    }
-
-// Helper function with better error handling
-    function sumValues(obj) {
-        if (!obj || typeof obj !== 'object') return 0;
-        return Object.values(obj).reduce((sum, val) => {
-            const numVal = Number(val);
-            return sum + (isNaN(numVal) ? 0 : numVal);
-        }, 0);
-    }
-
 });

@@ -15,7 +15,12 @@
 
     <div class="upload">
         <div class="upload__card">
-            <form method="post" action="/upload" enctype="multipart/form-data" class="upload__form">
+            <form id="uploadForm" method="post" action="/upload" enctype="multipart/form-data" class="upload__form">
+                <div class="form-group">
+                    <label for="libraryPrefix" class="form-label">Library Prefix:</label>
+                    <input type="text" name="libraryPrefix" id="libraryPrefix" placeholder="Enter library prefix" required>
+                </div>
+
                 <div class="upload__dropzone" id="dropzone">
                     <input type="file"
                            name="file"
@@ -61,6 +66,27 @@
     const dropzone = document.getElementById('dropzone');
     const fileInput = document.getElementById('file');
     const fileName = document.getElementById('fileName');
+    const uploadForm = document.getElementById('uploadForm');
+    const libraryPrefixInput = document.getElementById('libraryPrefix');
+
+    uploadForm.addEventListener('submit', function (e) {
+        const libraryPrefix = libraryPrefixInput.value.trim();
+        // Remove any existing hidden inputs to avoid duplication
+        const existingHidden = document.querySelector('input[name="libraryPrefix"]');
+        if (existingHidden) {
+            existingHidden.remove();
+        }
+
+        if (libraryPrefix ) {
+
+            uploadForm.action = `/upload?libraryPrefix=${encodeURIComponent(libraryPrefix)}`;
+           uploadForm.clear();
+
+        } else {
+            e.preventDefault();
+            alert("Please enter a valid Library Prefix (alphanumeric, underscores, and dashes only).");
+        }
+    });
 
     // Handle drag and drop events
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
