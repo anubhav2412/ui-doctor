@@ -16,17 +16,29 @@
 });
 
     // Maps metric element IDs to their corresponding tables
-    const metricTableMap = {
-    'libraryTagPercentage': 'libraryComponentsTable',
-    'nativeTagPercentage': 'nativeComponentsTable',
-    'libraryClassPercentage': 'libraryClassesTable',
-    'nativeClassPercentage': 'nativeClassesTable',
-    'uniqueLibraryTagPercentage': 'libraryComponentsTable',
-    'uniqueNativeTagPercentage': 'nativeComponentsTable',
-    'uniqueLibraryClassPercentage': 'libraryClassesTable',
-    'uniqueNativeClassPercentage': 'nativeClassesTable',
-    'overriddenStyles': 'overriddenStylesTable'
-};
+        const metricTableMap = {
+            'libraryTagPercentage': 'libraryComponentsTable',
+            'nativeTagPercentage': 'nativeComponentsTable',
+            'libraryClassPercentage': 'libraryClassesTable',
+            'nativeClassPercentage': 'nativeClassesTable',
+            'uniqueLibraryTagPercentage': 'libraryComponentsTable',
+            'uniqueNativeTagPercentage': 'nativeComponentsTable',
+            'uniqueLibraryClassPercentage': 'libraryClassesTable',
+            'uniqueNativeClassPercentage': 'nativeClassesTable',
+            'overriddenStyles': 'overriddenStylesTable',
+
+            // New mappings for code lines and APIs
+            'totalLibraryCodeLines': 'totalLibraryCodeLinesTable',
+            'totalLibraryAPIs': 'totalLibraryAPIsTable',
+
+            // If you want total lines of code metrics to link to a specific table:
+            'totalLinesOfCode': 'componentBreakdownTable',
+            'totalLibraryLinesOfCode': 'totalLibraryCodeLinesTable',
+
+            // If there's a percentage metric for library code (libraryCodePercentage),
+            // and you want to link it as well (assuming there's a suitable table):
+            'libraryCodePercentage': 'componentBreakdownTable'
+        };
 
     function initializeMetricCardLinks() {
     let activeCard = null;
