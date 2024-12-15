@@ -15,11 +15,11 @@ import java.util.*;
 @Service
 public class HTMLScannerService {
 
-    private  String LIBRARY_PREFIX = "";
+    private String LIBRARY_PREFIX = "";
     private Map<String, Object> latestResults;
 
-    public Map<String, Object> processZipFile(MultipartFile file,String prefix ) throws IOException {
-         LIBRARY_PREFIX = prefix;
+    public Map<String, Object> processZipFile(MultipartFile file, String prefix) throws IOException {
+        LIBRARY_PREFIX = prefix;
         File tempFile = File.createTempFile("uploaded", ".zip");
         file.transferTo(tempFile);
 
@@ -29,70 +29,72 @@ public class HTMLScannerService {
         Map<String, Integer> libraryClasses = new HashMap<>();
         Map<String, Integer> nativeClasses = new HashMap<>();
 
-        // New maps for line counts and API (attribute) counts
-        // For total (across all components):
-        Map<String, Integer> totalLibraryCodeLines = new HashMap<>(); // key: tagName, value: total lines of code
-        Map<String, Integer> totalLibraryAPIs = new HashMap<>();      // key: attribute name/value combos, value: count
+        // Maps for line counts and API counts
+        Map<String, Integer> totalLibraryCodeLines = new HashMap<>(); // tagName -> lines
+        Map<String, Integer> totalLibraryAPIs = new HashMap<>();      // attributeName=attributeValue -> count
 
-        // For per-component:
+        // Per-component maps
         Map<String, Map<String, Integer>> componentLibraryCodeLines = new HashMap<>(); // component -> (tagName -> lines)
         Map<String, Map<String, Integer>> componentLibraryAPIs = new HashMap<>();       // component -> (apiName -> count)
 
         Map<String, Map<String, Object>> componentBreakdown = new HashMap<>();
         Map<String, Map<String, Map<String, String>>> overriddenStyles = new HashMap<>();
 
+        // Track total lines of code (all HTML) vs library lines
+        int totalLinesOfCode = 0;
+        int totalLibraryLinesOfCode = 0;
+
         try (ZipFile zipFile = new ZipFile(tempFile)) {
             Enumeration<ZipArchiveEntry> entries = zipFile.getEntries();
             while (entries.hasMoreElements()) {
                 ZipArchiveEntry entry = entries.nextElement();
-
                 if (entry.getName().endsWith(".html")) {
                     String componentName = extractComponentName(entry.getName());
 
-                    // Component-specific counts
+                    // Component-specific maps
                     Map<String, Integer> componentLibraryComponents = new HashMap<>();
                     Map<String, Integer> componentNativeComponents = new HashMap<>();
                     Map<String, Integer> componentLibraryClasses = new HashMap<>();
                     Map<String, Integer> componentNativeClasses = new HashMap<>();
-
-                    // New component-level maps for lines and APIs
                     Map<String, Integer> compLibCodeLines = new HashMap<>();
                     Map<String, Integer> compLibAPIs = new HashMap<>();
 
-                    InputStream inputStream = zipFile.getInputStream(entry);
-                    // We need the raw HTML text to count lines in elements
-                    String htmlContent = readInputStreamAsString(inputStream);
-                    Document doc = Jsoup.parse(htmlContent, "");
+                    try (InputStream inputStream = zipFile.getInputStream(entry)) {
+                        String htmlContent = readInputStreamAsString(inputStream);
+                        Document doc = Jsoup.parse(htmlContent, "");
 
-                    // Count tags and classes
-                    countTags(doc, componentLibraryComponents, componentNativeComponents);
-                    countClasses(doc, componentLibraryClasses, componentNativeClasses);
+                        // Count total lines in this file
+                        int fileTotalLines = countLines(htmlContent);
+                        totalLinesOfCode += fileTotalLines;
 
-                    // Count library code lines and APIs
-                    countLibraryCodeAndAPIs(doc, htmlContent, compLibCodeLines, compLibAPIs);
+                        // Count tags, classes, and library-specific metrics
+                        countTags(doc, componentLibraryComponents, componentNativeComponents);
+                        countClasses(doc, componentLibraryClasses, componentNativeClasses);
+                        int fileLibraryLines = countLibraryCodeAndAPIs(doc, compLibCodeLines, compLibAPIs);
+                        totalLibraryLinesOfCode += fileLibraryLines;
 
-                    // Update global totals from this component
-                    mergeMaps(libraryComponents, componentLibraryComponents);
-                    mergeMaps(nativeComponents, componentNativeComponents);
-                    mergeMaps(libraryClasses, componentLibraryClasses);
-                    mergeMaps(nativeClasses, componentNativeClasses);
+                        // Update global totals
+                        mergeMaps(libraryComponents, componentLibraryComponents);
+                        mergeMaps(nativeComponents, componentNativeComponents);
+                        mergeMaps(libraryClasses, componentLibraryClasses);
+                        mergeMaps(nativeClasses, componentNativeClasses);
 
-                    mergeMaps(totalLibraryCodeLines, compLibCodeLines);
-                    mergeMaps(totalLibraryAPIs, compLibAPIs);
+                        mergeMaps(totalLibraryCodeLines, compLibCodeLines);
+                        mergeMaps(totalLibraryAPIs, compLibAPIs);
 
-                    // Store component-level breakdown
-                    Map<String, Object> componentResults = new HashMap<>();
-                    componentResults.put("libraryComponents", componentLibraryComponents);
-                    componentResults.put("nativeComponents", componentNativeComponents);
-                    componentResults.put("libraryClasses", componentLibraryClasses);
-                    componentResults.put("nativeClasses", componentNativeClasses);
-                    componentResults.put("libraryCodeLines", compLibCodeLines);
-                    componentResults.put("libraryAPIs", compLibAPIs);
+                        // Store component-level breakdown
+                        Map<String, Object> componentResults = new HashMap<>();
+                        componentResults.put("libraryComponents", componentLibraryComponents);
+                        componentResults.put("nativeComponents", componentNativeComponents);
+                        componentResults.put("libraryClasses", componentLibraryClasses);
+                        componentResults.put("nativeClasses", componentNativeClasses);
+                        componentResults.put("libraryCodeLines", compLibCodeLines);
+                        componentResults.put("libraryAPIs", compLibAPIs);
 
-                    componentBreakdown.put(componentName, componentResults);
-                    componentLibraryCodeLines.put(componentName, compLibCodeLines);
-                    componentLibraryAPIs.put(componentName, compLibAPIs);
-
+                        componentBreakdown.put(componentName, componentResults);
+                        componentLibraryCodeLines.put(componentName, compLibCodeLines);
+                        componentLibraryAPIs.put(componentName, compLibAPIs);
+                    }
                 } else if (entry.getName().endsWith(".scss") || entry.getName().endsWith(".css")) {
                     try (InputStream inputStream = zipFile.getInputStream(entry)) {
                         analyzeOverrides(inputStream, overriddenStyles);
@@ -105,6 +107,13 @@ public class HTMLScannerService {
             }
         }
 
+        // Calculate percentage of library lines of code
+        double libraryCodePercentage = 0.0;
+        if (totalLinesOfCode > 0) {
+            libraryCodePercentage = ((double) totalLibraryLinesOfCode / totalLinesOfCode) * 100;
+        }
+
+        // Prepare final results
         Map<String, Object> results = new HashMap<>();
         results.put("libraryComponents", libraryComponents);
         results.put("nativeComponents", nativeComponents);
@@ -112,13 +121,13 @@ public class HTMLScannerService {
         results.put("nativeClasses", nativeClasses);
         results.put("componentBreakdown", componentBreakdown);
         results.put("overriddenStyles", overriddenStyles);
-
-        // Add total library code lines and APIs
         results.put("totalLibraryCodeLines", totalLibraryCodeLines);
         results.put("totalLibraryAPIs", totalLibraryAPIs);
-        // Add component-level library code lines and APIs
         results.put("componentLibraryCodeLines", componentLibraryCodeLines);
         results.put("componentLibraryAPIs", componentLibraryAPIs);
+        results.put("totalLinesOfCode", totalLinesOfCode);
+        results.put("totalLibraryLinesOfCode", totalLibraryLinesOfCode);
+        results.put("libraryCodePercentage", libraryCodePercentage);
 
         latestResults = results;
         return results;
@@ -153,40 +162,36 @@ public class HTMLScannerService {
     }
 
     /**
-     * Count library code lines and library APIs (attributes like variation=primary)
-     * Library code lines: number of lines inside each library element (including the element's line itself).
-     * We can approximate line count by counting newline characters in the element's outerHtml().
+     * Counts library code lines and APIs.
+     * Returns total number of library lines found in the given document.
      *
-     * APIs: Count occurrences of attributes on library elements. For example, if element has attribute "variation=primary",
-     * we count that as a library API usage. We tally attributes by "attributeName=attributeValue".
+     * Library code lines: number of lines inside each library element.
+     * Library APIs: attribute usage on library elements.
      */
-    private void countLibraryCodeAndAPIs(Document doc, String htmlContent,
-                                         Map<String, Integer> compLibCodeLines,
-                                         Map<String, Integer> compLibAPIs) {
+    private int countLibraryCodeAndAPIs(Document doc,
+                                        Map<String, Integer> compLibCodeLines,
+                                        Map<String, Integer> compLibAPIs) {
+        int libraryLinesCount = 0;
+        for (Element element : doc.getAllElements()) {
+            String tagName = element.tagName();
+            if (tagName.startsWith(LIBRARY_PREFIX)) {
+                // Library element
+                String outerHtml = element.outerHtml().trim();
+                int lineCount = countLines(outerHtml);
+                libraryLinesCount += lineCount;
+                compLibCodeLines.merge(tagName, lineCount, Integer::sum);
 
-        // Select all library elements
-        Elements libraryElements = doc.select(LIBRARY_PREFIX + "*");
-        for (Element libElem : libraryElements) {
-            String tagName = libElem.tagName();
-
-            // Count lines of code
-            String outerHtml = libElem.outerHtml().trim();
-            int lineCount = countLines(outerHtml);
-            compLibCodeLines.merge(tagName, lineCount, Integer::sum);
-
-            // Count APIs: consider all attributes on this element as a form of API usage
-            for (org.jsoup.nodes.Attribute attr : libElem.attributes()) {
-                String attrKey = attr.getKey();
-                String attrVal = attr.getValue();
-                // You could refine what constitutes an API; here we count all attributes on library elements
-                String apiSignature = attrKey + "=" + attrVal;
-                compLibAPIs.merge(apiSignature, 1, Integer::sum);
+                // Count attributes (APIs)
+                element.attributes().forEach(attr -> {
+                    String apiSignature = attr.getKey() + "=" + attr.getValue();
+                    compLibAPIs.merge(apiSignature, 1, Integer::sum);
+                });
             }
         }
+        return libraryLinesCount;
     }
 
     private int countLines(String content) {
-        // Count lines by counting '\n' occurrences + 1 if not empty
         if (content == null || content.isEmpty()) return 0;
         int lines = 1;
         for (int i = 0; i < content.length(); i++) {
@@ -199,7 +204,6 @@ public class HTMLScannerService {
 
     private void analyzeOverrides(InputStream inputStream, Map<String, Map<String, Map<String, String>>> overriddenStyles) throws IOException {
         Map<String, Map<String, String>> componentStyles = parseCSS(inputStream);
-
         for (String selector : componentStyles.keySet()) {
             if (selector.startsWith("." + LIBRARY_PREFIX)) {
                 Map<String, String> overridden = new HashMap<>(componentStyles.get(selector));
