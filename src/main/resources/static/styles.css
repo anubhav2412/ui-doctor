@@ -408,3 +408,36 @@ body {
         padding: 1rem;
     }
 }
+.tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tab-link {
+    cursor: pointer;
+    background: var(--card-background);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow);
+    transition: background 0.3s;
+    font-weight: 500;
+}
+
+.tab-link:hover {
+    background: #f8fafc;
+}
+
+.tab-link.active {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}

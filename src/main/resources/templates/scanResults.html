@@ -12,221 +12,153 @@
         <h1 class="header__title">Component Analysis</h1>
         <p class="header__subtitle">Detailed breakdown of component and class usage</p>
     </header>
-    <div class="visualization-section">
-        <div class="charts-grid">
-            <!-- Charts will be dynamically inserted here by JavaScript -->
-        </div>
-    </div>
-    <div class="metrics-grid">
-        <!-- Existing Metrics -->
-        <div class="metric-card">
-            <h3 class="metric-card__title">Library Components</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="libraryTagPercentage">0</span>
-                <span class="metric-card__symbol">%</span>
-            </div>
-            <p class="metric-card__total" id="totalLibraryTags">Total: 0</p>
-        </div>
 
-        <div class="metric-card">
-            <h3 class="metric-card__title">Native Components</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="nativeTagPercentage">0</span>
-                <span class="metric-card__symbol">%</span>
-            </div>
-            <p class="metric-card__total" id="totalNativeTags">Total: 0</p>
-        </div>
-
-        <div class="metric-card">
-            <h3 class="metric-card__title">Library Classes</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="libraryClassPercentage">0</span>
-                <span class="metric-card__symbol">%</span>
-            </div>
-            <p class="metric-card__total" id="totalLibraryClasses">Total: 0</p>
-        </div>
-
-        <div class="metric-card">
-            <h3 class="metric-card__title">Native Classes</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="nativeClassPercentage">0</span>
-                <span class="metric-card__symbol">%</span>
-            </div>
-            <p class="metric-card__total" id="totalNativeClasses">Total: 0</p>
-        </div>
-
-        <!-- Unique Metrics -->
-        <div class="metric-card">
-            <h3 class="metric-card__title">Unique Library Components</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="uniqueLibraryTagPercentage">0</span>
-                <span class="metric-card__symbol">%</span>
-            </div>
-            <p class="metric-card__total" id="uniqueLibraryTags">Total: 0</p>
-        </div>
-
-        <div class="metric-card">
-            <h3 class="metric-card__title">Unique Native Components</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="uniqueNativeTagPercentage">0</span>
-                <span class="metric-card__symbol">%</span>
-            </div>
-            <p class="metric-card__total" id="uniqueNativeTags">Total: 0</p>
-        </div>
-
-        <div class="metric-card">
-            <h3 class="metric-card__title">Unique Library Classes</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="uniqueLibraryClassPercentage">0</span>
-                <span class="metric-card__symbol">%</span>
-            </div>
-            <p class="metric-card__total" id="uniqueLibraryClasses">Total: 0</p>
-        </div>
-
-        <div class="metric-card">
-            <h3 class="metric-card__title">Unique Native Classes</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="uniqueNativeClassPercentage">0</span>
-                <span class="metric-card__symbol">%</span>
-            </div>
-            <p class="metric-card__total" id="uniqueNativeClasses">Total: 0</p>
-        </div>
-
-        <div class="metric-card">
-            <h3 class="metric-card__title">Library Css Overrides</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="overriddenStyles">0</span>
-            </div>
-        </div>
-
-        <!-- New Metrics for Library Code Lines and APIs -->
-        <div class="metric-card">
-            <h3 class="metric-card__title">Library Code Lines</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="totalLibraryCodeLines">Total: 0</span>
-            </div>
-        </div>
-
-        <div class="metric-card">
-            <h3 class="metric-card__title">Library APIs</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="totalLibraryAPIs">Total: 0</span>
-            </div>
-        </div>
-
-        <!-- Additional Metrics for total lines and library percentage -->
-        <div class="metric-card">
-            <h3 class="metric-card__title">Total Lines of Code</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="totalLinesOfCode">Total: 0</span>
-            </div>
-        </div>
-
-        <div class="metric-card">
-            <h3 class="metric-card__title">Library Lines of Code</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="totalLibraryLinesOfCode">Total: 0</span>
-            </div>
-        </div>
-
-        <div class="metric-card">
-            <h3 class="metric-card__title">Library Code %</h3>
-            <div class="metric-card__content">
-                <span class="metric-card__percentage" id="libraryCodePercentage">0</span>
-                <span class="metric-card__symbol">%</span>
-            </div>
-        </div>
-
+    <!-- Tab Navigation -->
+    <div class="tabs">
+        <button class="tab-link active" data-tab="metricsTab">Summary</button>
+        <button class="tab-link" data-tab="resultsTab">Details</button>
     </div>
 
-    <section class="results-section full-width">
-        <h2 class="results-section__title">Overridden Styles</h2>
-        <div class="table-container">
-            <table class="results-table" id="overriddenStylesTable">
-                <thead>
-                <tr>
-                    <th>Selector</th>
-                    <th>Library Style</th>
-                    <th>Custom Style</th>
-                </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+    <!-- Metrics Section (Charts + Metric Cards) -->
+    <div id="metricsTab" class="tab-content active">
+        <div class="visualization-section">
+            <div class="charts-grid">
+                <!-- Charts will be dynamically inserted here by JavaScript -->
+            </div>
         </div>
-    </section>
-
-    <div class="results-grid">
-        <section class="results-section">
-            <h2 class="results-section__title">Library Components</h2>
-            <div class="table-container">
-                <table class="results-table" id="libraryComponentsTable">
-                    <thead>
-                    <tr>
-                        <th>Component</th>
-                        <th>Count</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+        <div class="metrics-grid">
+            <!-- Existing Metrics -->
+            <div class="metric-card">
+                <h3 class="metric-card__title">Library Components</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="libraryTagPercentage">0</span>
+                    <span class="metric-card__symbol">%</span>
+                </div>
+                <p class="metric-card__total" id="totalLibraryTags">Total: 0</p>
             </div>
-        </section>
 
-        <section class="results-section">
-            <h2 class="results-section__title">Native Components</h2>
-            <div class="table-container">
-                <table class="results-table" id="nativeComponentsTable">
-                    <thead>
-                    <tr>
-                        <th>Component</th>
-                        <th>Count</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div class="metric-card">
+                <h3 class="metric-card__title">Native Components</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="nativeTagPercentage">0</span>
+                    <span class="metric-card__symbol">%</span>
+                </div>
+                <p class="metric-card__total" id="totalNativeTags">Total: 0</p>
             </div>
-        </section>
 
-        <section class="results-section">
-            <h2 class="results-section__title">Library Classes</h2>
-            <div class="table-container">
-                <table class="results-table" id="libraryClassesTable">
-                    <thead>
-                    <tr>
-                        <th>Class</th>
-                        <th>Count</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div class="metric-card">
+                <h3 class="metric-card__title">Library Classes</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="libraryClassPercentage">0</span>
+                    <span class="metric-card__symbol">%</span>
+                </div>
+                <p class="metric-card__total" id="totalLibraryClasses">Total: 0</p>
             </div>
-        </section>
 
-        <section class="results-section">
-            <h2 class="results-section__title">Native Classes</h2>
-            <div class="table-container">
-                <table class="results-table" id="nativeClassesTable">
-                    <thead>
-                    <tr>
-                        <th>Class</th>
-                        <th>Count</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div class="metric-card">
+                <h3 class="metric-card__title">Native Classes</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="nativeClassPercentage">0</span>
+                    <span class="metric-card__symbol">%</span>
+                </div>
+                <p class="metric-card__total" id="totalNativeClasses">Total: 0</p>
             </div>
-        </section>
 
+            <!-- Unique Metrics -->
+            <div class="metric-card">
+                <h3 class="metric-card__title">Unique Library Components</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="uniqueLibraryTagPercentage">0</span>
+                    <span class="metric-card__symbol">%</span>
+                </div>
+                <p class="metric-card__total" id="uniqueLibraryTags">Total: 0</p>
+            </div>
+
+            <div class="metric-card">
+                <h3 class="metric-card__title">Unique Native Components</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="uniqueNativeTagPercentage">0</span>
+                    <span class="metric-card__symbol">%</span>
+                </div>
+                <p class="metric-card__total" id="uniqueNativeTags">Total: 0</p>
+            </div>
+
+            <div class="metric-card">
+                <h3 class="metric-card__title">Unique Library Classes</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="uniqueLibraryClassPercentage">0</span>
+                    <span class="metric-card__symbol">%</span>
+                </div>
+                <p class="metric-card__total" id="uniqueLibraryClasses">Total: 0</p>
+            </div>
+
+            <div class="metric-card">
+                <h3 class="metric-card__title">Unique Native Classes</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="uniqueNativeClassPercentage">0</span>
+                    <span class="metric-card__symbol">%</span>
+                </div>
+                <p class="metric-card__total" id="uniqueNativeClasses">Total: 0</p>
+            </div>
+
+            <div class="metric-card">
+                <h3 class="metric-card__title">Library Css Overrides</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="overriddenStyles">0</span>
+                </div>
+            </div>
+
+            <!-- New Metrics for Library Code Lines and APIs -->
+            <div class="metric-card">
+                <h3 class="metric-card__title">Library Code Lines</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="totalLibraryCodeLines">Total: 0</span>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3 class="metric-card__title">Library APIs</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="totalLibraryAPIs">Total: 0</span>
+                </div>
+            </div>
+
+            <!-- Additional Metrics for total lines and library percentage -->
+            <div class="metric-card">
+                <h3 class="metric-card__title">Total Lines of Code</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="totalLinesOfCode">Total: 0</span>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3 class="metric-card__title">Library Lines of Code</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="totalLibraryLinesOfCode">Total: 0</span>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3 class="metric-card__title">Library Code %</h3>
+                <div class="metric-card__content">
+                    <span class="metric-card__percentage" id="libraryCodePercentage">0</span>
+                    <span class="metric-card__symbol">%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Section (Tables) -->
+    <div id="resultsTab" class="tab-content">
         <section class="results-section full-width">
-            <h2 class="results-section__title">Component Breakdown</h2>
+            <h2 class="results-section__title">Overridden Styles</h2>
             <div class="table-container">
-                <table class="results-table" id="componentBreakdownTable">
+                <table class="results-table" id="overriddenStylesTable">
                     <thead>
                     <tr>
-                        <th>Component</th>
-                        <th>Library Tags</th>
-                        <th>Native Tags</th>
-                        <th>Library Classes</th>
-                        <th>Native Classes</th>
+                        <th>Selector</th>
+                        <th>Library Style</th>
+                        <th>Custom Style</th>
                     </tr>
                     </thead>
                     <tbody></tbody>
@@ -234,69 +166,148 @@
             </div>
         </section>
 
-        <!-- New Tables for Library Code Lines and APIs -->
-        <section class="results-section">
-            <h2 class="results-section__title">Total Library Code Lines</h2>
-            <div class="table-container">
-                <table class="results-table" id="totalLibraryCodeLinesTable">
-                    <thead>
-                    <tr>
-                        <th>Tag</th>
-                        <th>Lines</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
+        <div class="results-grid">
+            <section class="results-section">
+                <h2 class="results-section__title">Library Components</h2>
+                <div class="table-container">
+                    <table class="results-table" id="libraryComponentsTable">
+                        <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Count</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
 
-        <section class="results-section">
-            <h2 class="results-section__title">Total Library APIs</h2>
-            <div class="table-container">
-                <table class="results-table" id="totalLibraryAPIsTable">
-                    <thead>
-                    <tr>
-                        <th>API (attr=value)</th>
-                        <th>Count</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
+            <section class="results-section">
+                <h2 class="results-section__title">Native Components</h2>
+                <div class="table-container">
+                    <table class="results-table" id="nativeComponentsTable">
+                        <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Count</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
 
-        <section class="results-section">
-            <h2 class="results-section__title">Component Library Code Lines</h2>
-            <div class="table-container">
-                <table class="results-table" id="componentLibraryCodeLinesTable">
-                    <thead>
-                    <tr>
-                        <th>Component</th>
-                        <th>Tag -> Lines</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
+            <section class="results-section">
+                <h2 class="results-section__title">Library Classes</h2>
+                <div class="table-container">
+                    <table class="results-table" id="libraryClassesTable">
+                        <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Count</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
 
-        <section class="results-section">
-            <h2 class="results-section__title">Component Library APIs</h2>
-            <div class="table-container">
-                <table class="results-table" id="componentLibraryAPIsTable">
-                    <thead>
-                    <tr>
-                        <th>Component</th>
-                        <th>API -> Count</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
+            <section class="results-section">
+                <h2 class="results-section__title">Native Classes</h2>
+                <div class="table-container">
+                    <table class="results-table" id="nativeClassesTable">
+                        <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Count</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="results-section full-width">
+                <h2 class="results-section__title">Component Breakdown</h2>
+                <div class="table-container">
+                    <table class="results-table" id="componentBreakdownTable">
+                        <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Library Tags</th>
+                            <th>Native Tags</th>
+                            <th>Library Classes</th>
+                            <th>Native Classes</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- New Tables for Library Code Lines and APIs -->
+            <section class="results-section">
+                <h2 class="results-section__title">Total Library Code Lines</h2>
+                <div class="table-container">
+                    <table class="results-table" id="totalLibraryCodeLinesTable">
+                        <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Lines</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="results-section">
+                <h2 class="results-section__title">Total Library APIs</h2>
+                <div class="table-container">
+                    <table class="results-table" id="totalLibraryAPIsTable">
+                        <thead>
+                        <tr>
+                            <th>API (attr=value)</th>
+                            <th>Count</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="results-section">
+                <h2 class="results-section__title">Component Library Code Lines</h2>
+                <div class="table-container">
+                    <table class="results-table" id="componentLibraryCodeLinesTable">
+                        <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Tag -> Lines</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="results-section">
+                <h2 class="results-section__title">Component Library APIs</h2>
+                <div class="table-container">
+                    <table class="results-table" id="componentLibraryAPIsTable">
+                        <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>API -> Count</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
     </div>
 </div>
 <script src="scripts.js"></script>
 </body>
 </html>
-

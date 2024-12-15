@@ -14,6 +14,21 @@
     console.error("Error fetching scan results:", error);
     showErrorMessage();
 });
+        const tabs = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and tab contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+
+                // Add active class to the clicked tab and the corresponding tab content
+                const target = tab.getAttribute('data-tab');
+                tab.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
 
     // Maps metric element IDs to their corresponding tables
         const metricTableMap = {
@@ -163,7 +178,110 @@
     function calculatePercentage(value, total) {
     return total === 0 ? 0 : ((value / total) * 100).toFixed(1);
 }
+        function initializeMetricCardLinks() {
+            let activeCard = null;
+            let activeTable = null;
 
+            document.querySelectorAll('.metric-card').forEach(card => {
+                // Find the metric element inside the card
+                const percentageEl = card.querySelector('[id$="Percentage"], [id="overriddenStyles"], [id="totalLibraryCodeLines"], [id="totalLibraryAPIs"], [id="totalLinesOfCode"], [id="totalLibraryLinesOfCode"], [id="libraryCodePercentage"]');
+                if (!percentageEl) return;
+
+                const tableId = metricTableMap[percentageEl.id];
+                if (!tableId) return; // If there's no table for this metric, skip linking
+
+                card.style.cursor = 'pointer';
+
+                card.addEventListener('click', () => {
+                    const targetTable = document.getElementById(tableId);
+                    if (!targetTable) return;
+
+                    // Determine which tab the target table is in
+                    // Assuming:
+                    // - The metrics are in #metricsTab
+                    // - The results are in #resultsTab
+                    const metricsTab = document.getElementById('metricsTab');
+                    const resultsTab = document.getElementById('resultsTab');
+
+                    // Check if the target table is in resultsTab or metricsTab
+                    const isInMetricsTab = metricsTab.contains(targetTable);
+                    const isInResultsTab = resultsTab.contains(targetTable);
+
+                    // If the table is in the results tab, switch to that tab
+                    if (isInResultsTab) {
+                        switchTab('resultsTab');
+                    } else if (isInMetricsTab) {
+                        switchTab('metricsTab');
+                    }
+
+                    // Remove highlights from previously active card/table
+                    if (activeCard) {
+                        activeCard.classList.remove('active-card');
+                        activeCard.style.boxShadow = 'none';
+                    }
+                    if (activeTable) {
+                        activeTable.classList.remove('active-table');
+                        activeTable.style.boxShadow = 'none';
+                    }
+
+                    // Highlight this card and table
+                    card.classList.add('active-card');
+                    card.style.boxShadow = '0 0 0 2px #3b82f6';
+                    targetTable.classList.add('active-table');
+                    targetTable.style.boxShadow = '0 0 0 2px #3b82f6';
+
+                    targetTable.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    activeCard = card;
+                    activeTable = targetTable;
+                });
+
+                card.addEventListener('mouseenter', () => {
+                    if (card !== activeCard) {
+                        card.style.boxShadow = '0 0 0 2px #93c5fd';
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (card !== activeCard) {
+                        card.style.boxShadow = 'none';
+                    }
+                });
+            });
+
+            const style = document.createElement('style');
+            style.textContent = `
+        .metric-card {
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .results-table {
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .active-card, .active-table {
+            transition: box-shadow 0.2s ease-in-out;
+        }
+    `;
+            document.head.appendChild(style);
+        }
+
+// Helper function to switch tabs
+        function switchTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            // Remove active from all tabs/contents
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(tc => tc.classList.remove('active'));
+
+            // Activate the requested tab
+            const targetTabButton = [...tabs].find(t => t.dataset.tab === tabId);
+            const targetTabContent = document.getElementById(tabId);
+
+            if (targetTabButton && targetTabContent) {
+                targetTabButton.classList.add('active');
+                targetTabContent.classList.add('active');
+            }
+        }
     function updateDOMElements(metrics) {
     Object.entries(metrics).forEach(([key, value]) => {
     const element = document.getElementById(key);
