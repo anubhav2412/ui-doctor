@@ -411,75 +411,106 @@
     chartSection.appendChild(legend);
     container.appendChild(chartSection);
 }
+        function createPieCharts(data) {
+            if (!data || typeof data !== 'object') {
+                console.error('Invalid data format');
+                return;
+            }
 
-    function createPieCharts(data) {
-    if (!data || typeof data !== 'object') {
-    console.error('Invalid data format');
-    return;
-}
+            const metricsContainer = document.createElement('div');
+            metricsContainer.className = 'charts-grid';
 
-    const metricsContainer = document.createElement('div');
-    metricsContainer.className = 'charts-grid';
+            const metricsGrid = document.querySelector('.metrics-grid');
+            metricsGrid.after(metricsContainer);
 
-    const metricsGrid = document.querySelector('.metrics-grid');
-    metricsGrid.after(metricsContainer);
+            const colorPalette = {
+                library: {
+                    primary: '#0284c7',
+                    secondary: '#0369a1',
+                    tertiary: '#0C4A6E'
+                },
+                native: {
+                    primary: '#059669',
+                    secondary: '#047857',
+                    tertiary: '#064E3B'
+                }
+            };
 
-    const colorPalette = {
-    library: {
-    primary: '#0284c7',
-    secondary: '#0369a1',
-    tertiary: '#0C4A6E'
-},
-    native: {
-    primary: '#059669',
-    secondary: '#047857',
-    tertiary: '#064E3B'
-}
-};
+            const libraryComponents = data.libraryComponents || {};
+            const nativeComponents = data.nativeComponents || {};
+            const libraryClasses = data.libraryClasses || {};
+            const nativeClasses = data.nativeClasses || {};
 
-    const libraryComponents = data.libraryComponents || {};
-    const nativeComponents = data.nativeComponents || {};
-    const libraryClasses = data.libraryClasses || {};
-    const nativeClasses = data.nativeClasses || {};
+            const totalLibraryTags = sumValues(libraryComponents);
+            const totalNativeTags = sumValues(nativeComponents);
+            const totalLibraryClasses = sumValues(libraryClasses);
+            const totalNativeClasses = sumValues(nativeClasses);
 
-    try {
-    createPieChart(
-    'Total Components',
-    [
-{name: 'Library Components', value: sumValues(libraryComponents), color: colorPalette.library.primary},
-{name: 'Native Components', value: sumValues(nativeComponents), color: colorPalette.native.primary}
-    ],
-    metricsContainer
-    );
+            const uniqueLibraryComponents = Object.keys(libraryComponents).length || 0;
+            const uniqueNativeComponents = Object.keys(nativeComponents).length || 0;
+            const uniqueLibraryClsCount = Object.keys(libraryClasses).length || 0;
+            const uniqueNativeClsCount = Object.keys(nativeClasses).length || 0;
 
-    createPieChart(
-    'Total Classes',
-    [
-{name: 'Library Classes', value: sumValues(libraryClasses), color: colorPalette.library.secondary},
-{name: 'Native Classes', value: sumValues(nativeClasses), color: colorPalette.native.secondary}
-    ],
-    metricsContainer
-    );
+            const totalLinesOfCode = data.totalLinesOfCode || 0;
+            const totalLibraryLinesOfCode = data.totalLibraryLinesOfCode || 0;
+            const nonLibraryLinesOfCode = totalLinesOfCode - totalLibraryLinesOfCode;
 
-    createPieChart(
-    'Unique Components',
-    [
-{
-    name: 'Unique Library Components',
-    value: Object.keys(libraryComponents).length || 0,
-    color: colorPalette.library.tertiary
-},
-{
-    name: 'Unique Native Components',
-    value: Object.keys(nativeComponents).length || 0,
-    color: colorPalette.native.tertiary
-}
-    ],
-    metricsContainer
-    );
-} catch (error) {
-    console.error('Error creating charts:', error);
-    showErrorMessage('Error creating charts. Please check the console for details.');
-}
-}
+            try {
+                // Total Components Pie
+                createPieChart(
+                    'Total Components',
+                    [
+                        { name: 'Library Components', value: totalLibraryTags, color: colorPalette.library.primary },
+                        { name: 'Native Components', value: totalNativeTags, color: colorPalette.native.primary }
+                    ],
+                    metricsContainer
+                );
+
+                // Total Classes Pie
+                createPieChart(
+                    'Total Classes',
+                    [
+                        { name: 'Library Classes', value: totalLibraryClasses, color: colorPalette.library.secondary },
+                        { name: 'Native Classes', value: totalNativeClasses, color: colorPalette.native.secondary }
+                    ],
+                    metricsContainer
+                );
+
+                // Unique Components Pie
+                createPieChart(
+                    'Unique Components',
+                    [
+                        { name: 'Unique Library Components', value: uniqueLibraryComponents, color: colorPalette.library.tertiary },
+                        { name: 'Unique Native Components', value: uniqueNativeComponents, color: colorPalette.native.tertiary }
+                    ],
+                    metricsContainer
+                );
+
+                // Unique Classes Pie
+                createPieChart(
+                    'Unique Classes',
+                    [
+                        { name: 'Unique Library Classes', value: uniqueLibraryClsCount, color: colorPalette.library.primary },
+                        { name: 'Unique Native Classes', value: uniqueNativeClsCount, color: colorPalette.native.primary }
+                    ],
+                    metricsContainer
+                );
+
+                // Lines of Code Pie (Library vs Other)
+                createPieChart(
+                    'Lines of Code',
+                    [
+                        { name: 'Library Lines', value: totalLibraryLinesOfCode, color: colorPalette.library.secondary },
+                        { name: 'Other Lines', value: nonLibraryLinesOfCode, color: colorPalette.native.secondary }
+                    ],
+                    metricsContainer
+                );
+
+                // Each call to createPieChart will automatically generate a legend
+                // based on the data passed to it.
+            } catch (error) {
+                console.error('Error creating charts:', error);
+                showErrorMessage('Error creating charts. Please check the console for details.');
+            }
+        }
 });
